@@ -1,5 +1,7 @@
 var fs = require('fs');
 var prompt = require('prompt');
+var rimraf = require('rimraf');
+var exec = require('exec');
 
 var plugin_name,
   class_name,
@@ -7,7 +9,8 @@ var plugin_name,
   seed_plugin_name = "yourplugin",
   seed_class_name = "YourPlugin",
   seed_github_username = "YourName",
-  demo_folder = "demo";
+  demo_folder = "demo",
+  init_git;
 
 console.log('NativeScript Plugin Seed Configuration');
 prompt.start();
@@ -97,6 +100,24 @@ function adjustScripts() {
         fs.writeFileSync(file, result);
       }
     }
-    console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
-    console.log("You can now run 'npm run setup' and start cracking!");
+
+    initGit();
+}
+
+function initGit() {
+    prompt.get({
+        name: 'init_git',
+        description: 'Do you want to init a fresh local git project? If you previously \'git clone\'d this repo that would be wise (y/n)',
+        default: 'y'
+    }, function (err, result) {
+        if (err) {
+            return console.log(err);
+        }
+        if (result.init_git && result.init_git.toLowerCase() === 'y') {
+            rimraf.sync('.git');
+            exec('git init -q .' + path);
+        }
+        console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
+        console.log("You can now run 'npm run setup' and start cracking!");
+    });
 }
