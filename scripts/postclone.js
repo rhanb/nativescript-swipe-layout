@@ -73,7 +73,20 @@ function renameFiles() {
 
 function adjustScripts() {
     console.log('Adjusting scripts..');
+
+    // add all files in the root
     var files = fs.readdirSync(".");
+
+    // add demo's package.json
+    files.push(demo_folder + "/package.json");
+
+    // add the demo files
+    var demoFiles = fs.readdirSync(demo_folder + "/app/");
+    for (var d in demoFiles) {
+      var demoFile = demoFiles[d];
+      files.push(demo_folder + "/app/" + demoFile);
+    }
+
     for (var f in files) {
       var file = files[f];
       if (file.indexOf(".") > 0) {
@@ -85,4 +98,5 @@ function adjustScripts() {
       }
     }
     console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
+    console.log("You can now run 'npm run setup' and start cracking!");
 }
