@@ -28,7 +28,7 @@ Those `demo` tasks are just general helpers. You may want to have more granular 
 cd demo
 
 // when developing, to ensure the latest code is built into the demo, it's a guarantee to remove the plugin and add it back
-tns plugin remove nativescript-directions
+tns plugin remove nativescript-yourplugin
 tns plugin add ..
 
 // manual platform adds

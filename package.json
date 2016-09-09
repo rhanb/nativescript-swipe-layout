@@ -1,8 +1,8 @@
 {
-  "name": "nativescript-directions",
+  "name": "nativescript-yourplugin",
   "version": "1.0.0",
   "description": "Your awesome NativeScript plugin.",
-  "main": "directions.js",
+  "main": "yourplugin.js",
   "typings": "index.d.ts",
   "nativescript": {
     "platforms": {
@@ -14,13 +14,13 @@
     "build": "tsc",
     "demo.ios": "npm run preparedemo && cd demo && tns emulate ios",
     "demo.android": "npm run preparedemo && cd demo && tns run android",
-    "preparedemo": "npm run build && cd demo && tns plugin remove nativescript-directions && tns plugin add .. && tns install",
+    "preparedemo": "npm run build && cd demo && tns plugin remove nativescript-yourplugin && tns plugin add .. && tns install",
     "setup": "npm i && cd demo && npm i && cd .. && npm run build && cd demo && tns plugin add .. && cd ..",
     "postclone": "npm i && node scripts/postclone.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/EddyVerbruggen/nativescript-directions.git"
+    "url": "https://github.com/YourName/nativescript-yourplugin.git"
   },
   "keywords": [
     "NativeScript",
@@ -33,13 +33,13 @@
     "email": "youremail@yourdomain.com"
   },
   "bugs": {
-    "url": "https://github.com/EddyVerbruggen/nativescript-directions/issues"
+    "url": "https://github.com/YourName/nativescript-yourplugin/issues"
   },
   "license": {
     "type": "MIT",
-    "url": "https://github.com/EddyVerbruggen/nativescript-directions/blob/master/LICENSE"
+    "url": "https://github.com/YourName/nativescript-yourplugin/blob/master/LICENSE"
   },
-  "homepage": "https://github.com/EddyVerbruggen/nativescript-directions",
+  "homepage": "https://github.com/YourName/nativescript-yourplugin",
   "readmeFilename": "README.md",
   "devDependencies": {
     "tns-core-modules": "^2.2.0",
