@@ -1,6 +1,7 @@
 *.js
 *.js.map
 *.log
+!scripts/*.js
 demo/app/*.js
 demo/*.d.ts
 demo/lib

@@ -5,8 +5,9 @@
 1. `git clone https://github.com/NathanWalker/nativescript-plugin-seed.git myplugin`
 2. `npm install -g typescript`
 3. `cd myplugin`
-2. `npm run setup`
-3. Get to work.
+4. `npm run postclone`
+5. `npm run setup`
+6. Get to work.
 
 This seed expands on several things [presented here](http://developer.telerik.com/featured/creating-nativescript-plugins-in-typescript/).
 
@@ -14,19 +15,6 @@ This seed expands on several things [presented here](http://developer.telerik.co
 
 The seed is prepared to allow you to test and try out your plugin via the `demo` folder.
 Additionally it provides a proper `.gitignore` to keep GitHub tidy as well as `.npmignore` to ensure everyone is happy when you publish your plugin via npm.
-
-### Prepare
-
-You'll want to change a couple things right away:
-
-* Change the name of the plugin all throughout `package.json` (including github repo, etc.) and the filenames.
-* Also in `package.json`, find this line:
-
-```
-"preparedemo": "npm run build; cd demo; tns plugin remove nativescript-yourplugin; tns plugin add ..; tns install",
-```
-
-Replace `nativescript-yourplugin` with your actual plugin name.
 
 ### Typical development workflow:
 
@@ -40,7 +28,7 @@ Those `demo` tasks are just general helpers. You may want to have more granular 
 cd demo
 
 // when developing, to ensure the latest code is built into the demo, it's a guarantee to remove the plugin and add it back
-tns plugin remove nativescript-yourplugin // replace with your plugin name
+tns plugin remove nativescript-yourplugin
 tns plugin add ..
 
 // manual platform adds
