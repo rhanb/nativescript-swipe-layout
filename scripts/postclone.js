@@ -1,7 +1,7 @@
 var fs = require('fs');
 var prompt = require('prompt');
 var rimraf = require('rimraf');
-var exec = require('exec');
+var exec = require('child_process').exec;
 
 var plugin_name,
   class_name,
@@ -115,7 +115,7 @@ function initGit() {
         }
         if (result.init_git && result.init_git.toLowerCase() === 'y') {
             rimraf.sync('.git');
-            exec('git init -q .');
+            exec('git init -q .', function(error, stdout, stderr) {});
         }
         console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
         console.log("You can now run 'npm run setup' and start cracking!");
