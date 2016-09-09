@@ -1,7 +1,6 @@
 var fs = require('fs');
 var prompt = require('prompt');
 
-// The directories where the Podfile and include.gradle are stored
 var plugin_name,
   class_name,
   github_username,
@@ -15,11 +14,9 @@ prompt.start();
 askGithubUsername();
 
 function askGithubUsername() {
-    // TODO remove default
     prompt.get({
         name: 'github_username',
-        description: 'What is yout GitHub username (used for updating package.json)? Example: NathanWalker / EddyVerbruggen.',
-        default: 'EddyVerbruggen'
+        description: 'What is your GitHub username (used for updating package.json)? Example: NathanWalker / EddyVerbruggen.'
     }, function (err, result) {
         if (err) {
             return console.log(err);
@@ -30,11 +27,9 @@ function askGithubUsername() {
 }
 
 function askPluginName() {
-    // TODO remove default
     prompt.get({
         name: 'plugin_name',
-        description: 'What will be the name of your plugin? (examples: yourplugin / google-maps / bluetooth)',
-        default: 'google-maps'
+        description: 'What will be the name of your plugin? Use lowercase characters and dashes only, like: yourplugin / google-maps / bluetooth.'
     }, function (err, result) {
         if (err) {
             return console.log(err);
@@ -63,8 +58,7 @@ function renameFiles() {
       var file = files[f];
       if (file.indexOf(seed_plugin_name) === 0) {
           var newName = plugin_name + file.substr(file.indexOf("."));
-          // TODO enable
-        //   fs.renameSync(file, newName);
+          fs.renameSync(file, newName);
       }
     }
 
@@ -81,10 +75,8 @@ function adjustScripts() {
         var result = contents.replace(new RegExp(seed_plugin_name, "g"), plugin_name);
         result = result.replace(new RegExp(seed_class_name, "g"), class_name);
         result = result.replace(new RegExp(seed_github_username, "g"), github_username);
-        console.log(result);
-        // TODO enable
-        // fs.writeFileSync(fileName, newContent);
+        fs.writeFileSync(fileName, newContent);
       }
     }
-    console.log("Configuration finished! If you're not happy with the result please remove this folder and clone the seed again. Then rerun this script.");
+    console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
 }
