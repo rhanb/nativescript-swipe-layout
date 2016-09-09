@@ -16,10 +16,13 @@ askGithubUsername();
 function askGithubUsername() {
     prompt.get({
         name: 'github_username',
-        description: 'What is your GitHub username (used for updating package.json)? Example: NathanWalker / EddyVerbruggen.'
+        description: 'What is your GitHub username (used for updating package.json)? Example: NathanWalker / EddyVerbruggen'
     }, function (err, result) {
         if (err) {
             return console.log(err);
+        }
+        if (!result.github_username) {
+            return console.log("Dude, the GitHub username is mandatory!");
         }
         github_username = result.github_username;
         askPluginName();
@@ -29,10 +32,13 @@ function askGithubUsername() {
 function askPluginName() {
     prompt.get({
         name: 'plugin_name',
-        description: 'What will be the name of your plugin? Use lowercase characters and dashes only, like: yourplugin / google-maps / bluetooth.'
+        description: 'What will be the name of your plugin? Use lowercase characters and dashes only. Example: yourplugin / google-maps / bluetooth'
     }, function (err, result) {
         if (err) {
             return console.log(err);
+        }
+        if (!result.plugin_name) {
+            return console.log("Dude, the plugin name is mandatory!");
         }
         plugin_name = result.plugin_name;
         generateClassName();
@@ -47,7 +53,7 @@ function generateClassName() {
         var part = plugin_name_parts[p];
         class_name += (part[0].toUpperCase() + part.substr(1));
     }
-    console.log('Configuring ' + class_name + ' as the TypeScript Class name.');
+    console.log('Using ' + class_name + ' as the TypeScript Class name..');
     renameFiles();
 }
 
@@ -75,7 +81,7 @@ function adjustScripts() {
         var result = contents.replace(new RegExp(seed_plugin_name, "g"), plugin_name);
         result = result.replace(new RegExp(seed_class_name, "g"), class_name);
         result = result.replace(new RegExp(seed_github_username, "g"), github_username);
-        fs.writeFileSync(fileName, newContent);
+        fs.writeFileSync(file, result);
       }
     }
     console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
