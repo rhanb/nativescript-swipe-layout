@@ -115,7 +115,7 @@ function initGit() {
         }
         if (result.init_git && result.init_git.toLowerCase() === 'y') {
             rimraf.sync('.git');
-            exec('git init -q .' + path);
+            exec('git init -q .');
         }
         console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
         console.log("You can now run 'npm run setup' and start cracking!");
