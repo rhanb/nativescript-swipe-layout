@@ -43,7 +43,7 @@
   "homepage": "https://github.com/YourName/nativescript-yourplugin",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "tns-core-modules": "^2.2.0",
+    "tns-core-modules": "^2.2.1",
     "tns-platform-declarations": "^2.2.0",
     "typescript": "^1.8.10",
     "prompt": "^1.0.0",

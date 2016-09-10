@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "nativescript-yourplugin": "file:..",
-    "tns-core-modules": "^2.2.0"
+    "tns-core-modules": "^2.2.1"
   },
   "devDependencies": {
     "babel-traverse": "6.7.6",
