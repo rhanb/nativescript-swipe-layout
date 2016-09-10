@@ -8,6 +8,7 @@ var plugin_name,
   github_username,
   seed_plugin_name = "yourplugin",
   seed_class_name = "YourPlugin",
+  seed_demo_property_name = "yourPlugin",
   seed_github_username = "YourName",
   demo_folder = "demo",
   init_git;
@@ -90,13 +91,20 @@ function adjustScripts() {
       files.push(demo_folder + "/app/" + demoFile);
     }
 
+    // prepare and cache a few Regexp thingies
+    var regexp_seed_plugin_name = new RegExp(seed_plugin_name, "g");
+    var regexp_seed_class_name = new RegExp(seed_class_name, "g");
+    var regexp_seed_demo_property_name = new RegExp(seed_demo_property_name, "g");
+    var regexp_seed_github_username = new RegExp(seed_github_username, "g");
+
     for (var f in files) {
       var file = files[f];
       if (file.indexOf(".") > 0) {
         var contents = fs.readFileSync(file, 'utf8');
-        var result = contents.replace(new RegExp(seed_plugin_name, "g"), plugin_name);
-        result = result.replace(new RegExp(seed_class_name, "g"), class_name);
-        result = result.replace(new RegExp(seed_github_username, "g"), github_username);
+        var result = contents.replace(regexp_seed_plugin_name, plugin_name);
+        result = result.replace(regexp_seed_class_name, class_name);
+        result = result.replace(regexp_seed_demo_property_name, class_name[0].toLowerCase() + class_name.substr(1));
+        result = result.replace(regexp_seed_github_username, github_username);
         fs.writeFileSync(file, result);
       }
     }
