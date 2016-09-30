@@ -16,6 +16,25 @@ This seed expands on several things [presented here](http://developer.telerik.co
 The seed is prepared to allow you to test and try out your plugin via the `demo` folder.
 Additionally it provides a proper `.gitignore` to keep GitHub tidy as well as `.npmignore` to ensure everyone is happy when you publish your plugin via npm.
 
+### Linking to CocoaPod or Android Arsenal plugins
+
+You will want to create these folders and files in the root:
+
+```
+platforms --
+  ios --
+    Podfile
+  android --
+    include.gradle
+```
+
+Doing so will open up those native apis to your plugin :)
+
+Take a look at these existing plugins for how that can be done very simply:
+
+* [nativescript-cardview](https://github.com/bradmartin/nativescript-cardview/tree/master/platforms)
+* [nativescript-floatingactionbutton](https://github.com/bradmartin/nativescript-floatingactionbutton/tree/master/platforms)
+
 ### Typical development workflow:
 
 1. Make changes to plugin files
