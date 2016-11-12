@@ -1,4 +1,4 @@
-import {Common} from "./yourplugin.common";
+import { Common } from './yourplugin.common';
 
 export class YourPlugin extends Common {
 
