@@ -90,6 +90,8 @@ function adjustScripts() {
       var demoFile = demoFiles[d];
       files.push(demo_folder + "/app/" + demoFile);
     }
+    // add the tests
+    files.push(demo_folder + "/app/tests/tests.js");
 
     // prepare and cache a few Regexp thingies
     var regexp_seed_plugin_name = new RegExp(seed_plugin_name, "g");
