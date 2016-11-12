@@ -62,6 +62,19 @@ Then use any of the available options from the `tns` command line:
 * [Run your project](https://github.com/NativeScript/nativescript-cli#run-your-project)
 * [Full list of commands](https://github.com/NativeScript/nativescript-cli#the-commands)
 
+## Unittesting
+This plugin automatically adds Jasmine-based unittest support to your plugin.
+Open `demo/app/tests/tests.js` and adjust its contents.
+
+You can read more about this topic [here](https://docs.nativescript.org/tooling/testing).
+
+Once you're ready to test your plugin's API execute one of these commands in the plugin root:
+
+```
+npm run test.ios
+npm run test.android
+```
+
 ## Publish
 
 When you have everything ready to publish:
