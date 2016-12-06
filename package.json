@@ -2,7 +2,7 @@
   "name": "nativescript-yourplugin",
   "version": "1.0.0",
   "description": "Your awesome NativeScript plugin.",
-  "main": "yourplugin.js",
+  "main": "yourplugin",
   "typings": "index.d.ts",
   "nativescript": {
     "platforms": {
