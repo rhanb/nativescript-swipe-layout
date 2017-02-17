@@ -12,7 +12,7 @@
     "nativescript-theme-core": "^1.0.2",
     "nativescript-unit-test-runner": "^0.3.4",
     "nativescript-yourplugin": "file:..",
-    "tns-core-modules": "^2.5.0"
+    "tns-core-modules": "^2.5.1"
   },
   "devDependencies": {
     "babel-traverse": "6.12.0",
