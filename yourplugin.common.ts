@@ -1,10 +1,12 @@
+import { Observable } from 'data/observable';
 import * as app from 'application';
 import * as dialogs from 'ui/dialogs';
 
-export class Common {
+export class Common extends Observable {
   public message: string;
 
   constructor() {
+    super();
     this.message = Utils.SUCCESS_MSG();
   }
 }
