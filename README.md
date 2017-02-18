@@ -3,11 +3,10 @@
 ## Getting started
 
 1. `git clone https://github.com/NathanWalker/nativescript-plugin-seed.git myplugin`
-2. `npm install -g typescript`
-3. `cd myplugin`
-4. `npm run postclone`
-5. `npm run setup`
-6. Get to work.
+2. `cd myplugin`
+3. `npm run postclone`
+4. `npm run setup`
+5. Get to work.
 
 This seed expands on several things [presented here](http://developer.telerik.com/featured/creating-nativescript-plugins-in-typescript/).
 
