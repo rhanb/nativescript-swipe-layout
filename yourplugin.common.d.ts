@@ -1,4 +1,5 @@
-export declare class Common {
+import { Observable } from 'data/observable';
+export declare class Common extends Observable {
     message: string;
     constructor();
 }
