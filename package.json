@@ -15,13 +15,12 @@
     "demo.ios": "npm run preparedemo && cd demo && tns run ios --emulator",
     "demo.ios.device": "npm run preparedemo && cd demo && tns run ios",
     "demo.android": "npm run preparedemo && cd demo && tns run android --emulator",
-    "test.ios": "cd demo && tns test ios --emulator",
-    "test.ios.device": "cd demo && tns test ios",
-    "test.android": "npm run deleteplatforms && cd demo && tns test android",
+    "test.ios": "cd demo && tns platform remove ios && tns test ios --emulator",
+    "test.ios.device": "cd demo && tns platform remove ios && tns test ios",
+    "test.android": "cd demo && tns platform remove android && tns test android",
     "preparedemo": "npm run build && cd demo && tns plugin remove nativescript-yourplugin && tns plugin add .. && tns install",
     "setup": "npm i && cd demo && npm i && cd .. && npm run build && cd demo && tns plugin add .. && cd ..",
-    "postclone": "npm i && node scripts/postclone.js",
-    "deleteplatforms": "cd demo && if exist platforms rmdir platforms /s /q"
+    "postclone": "npm i && node scripts/postclone.js"
   },
   "repository": {
     "type": "git",
