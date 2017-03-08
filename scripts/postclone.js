@@ -81,6 +81,9 @@ function adjustScripts() {
     // add all files in the root
     var files = fs.readdirSync(".");
 
+    // add include.gradle
+    files.push("platforms/android/include.gradle");
+
     // add demo's package.json
     files.push(demo_folder + "/package.json");
 
@@ -139,5 +142,7 @@ function initGit() {
         }
         console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
         console.log("You can now run 'npm run setup' and start cracking!");
+        
+        process.exit();
     });
 }
