@@ -1,4 +1,4 @@
-# Develop a NativeScript plugin
+# Develop a NativeScript plugin now (w/ TypeScript) [![Build Status](https://travis-ci.org/NativeScript/nativescript-plugin-seed.svg?branch=master)](https://travis-ci.org/NativeScript/nativescript-plugin-seed)
 
 ## Getting started
 
@@ -82,14 +82,8 @@ When you have everything ready to publish:
 * `npm run build` - **very important** - ensure the latest is built **before** you publish
 * `npm publish`
 
-## Contributing - Want to make the seed better?
+## TravisCI
 
-Or at least help keep it up to date with NativeScript releases, which would be excellent.
+The plugin structure comes with fully functional .travis.yml file that deploys the testing app on Android emulator and as a subsequent step runs the tests from [UnitTesting section](https://github.com/NativeScript/nativescript-plugin-seed#unittesting). All you have to do, after cloning the repo and implementing your plugin and tests, is to sign up at [https://travis-ci.org/](https://travis-ci.org/). Then enable your plugin's repo on "https://travis-ci.org/profile/<your github user\>" and that's it. Next time a PR is openend or change is commited to a branch TravisCI will trigger a build testing the code.
 
-```
-npm install -g typescript  // if you don't already have it
-git clone https://github.com/NathanWalker/nativescript-plugin-seed
-cd nativescript-plugin-seed
-
-// Improve!
-```
+To properly show current build status you will have to edit the badge at the start of the README.md file so it matches your repo, user and branch. 
