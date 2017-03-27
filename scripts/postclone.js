@@ -122,6 +122,7 @@ function adjustScripts() {
 function replaceReadMe() {
     var contents = fs.readFileSync(readme_template_file);
     fs.writeFileSync(readme_file, contents);
+    fs.unlinkSync(readme_template_file);
     
     initGit();
 }
