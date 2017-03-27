@@ -11,7 +11,9 @@ var plugin_name,
   seed_demo_property_name = "yourPlugin",
   seed_github_username = "YourName",
   demo_folder = "demo",
-  init_git;
+  init_git,
+  readme_template_file = "README-TEMPLATE.md",
+  readme_file = "README.md";
 
 console.log('NativeScript Plugin Seed Configuration');
 prompt.start();
@@ -114,6 +116,13 @@ function adjustScripts() {
       }
     }
 
+    replaceReadMe();
+}
+
+function replaceReadMe() {
+    var contents = fs.readFileSync(readme_template_file);
+    fs.writeFileSync(readme_file, contents);
+    
     initGit();
 }
 
@@ -140,6 +149,7 @@ function initGit() {
                 }
             });
         }
+
         console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
         console.log("You can now run 'npm run setup' and start cracking!");
         
