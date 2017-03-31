@@ -30,10 +30,11 @@ Describe any usage specifics for your plugin. Give examples for Android, iOS, An
 
 Describe your plugin methods and properties here. See [nativescript-feedback](https://github.com/EddyVerbruggen/nativescript-feedback) for example.
     
-	```javascript
-    API code snippets here
-    ```)
+| Property | Default | Description |
+| --- | --- | --- |
+| some property | property default value | property description, default values, etc.. |
+| another property | property default value | property description, default values, etc.. |
     
 ## License
 
-Describe the license your plugin uses.
+Apache License Version 2.0, January 2004

@@ -3,12 +3,51 @@
 ## Getting started
 
 1. `git clone https://github.com/NathanWalker/nativescript-plugin-seed.git myplugin`
-2. `cd myplugin`
+2. `cd myplugin/src`
 3. `npm run postclone`
 4. `npm run setup`
-5. Get to work.
+5. Continue with development (recommended) or usage setup
+
+### Development setup
+For easier development and debugging purposes continue with the following steps:
+
+1. Make sure your plugin is removed as dependency from the demo project
+2. In command prompt/terminal navigate to `src` folder and execute `npm run development.setup` - this will add a sym link to the plugin code in the demo project allowing you to do changes and review them in the demo without adding/removing the plugin. [Read more about npm link](https://docs.npmjs.com/cli/link)
+3. Open `demo/package.json` and update `dependencies` key to add a dependency to your plugin:
+
+```
+"nativescript-yourplugin-name": "*"
+```  
+
+4. Open command prompt/terminal, navigate to `src` folder and run `tsc -w`
+5. Open command prompt/terminal, navigate to `demo` folder and run `tns run android --syncAllFiles` or `tns run ios --syncAllFiles`
+6. Now go and make a change to your plugin. It will be automatically applied to the demo project.
+
+You can review any of the available options from the `tns` command line:
+
+* [Emulate your project](https://github.com/NativeScript/nativescript-cli#emulate-your-project)
+* [Run your project](https://github.com/NativeScript/nativescript-cli#run-your-project)
+* [Full list of commands](https://github.com/NativeScript/nativescript-cli#the-commands)
+
+
+### Usage setup
+In addition, there some `demo` tasks defined in plugin's package.json which you can use to explicitly add/remove/install your plugin to the demo app. This is the scenario in which the users will use your plugin.
+
+```
+cd demo
+
+// when developing, to ensure the latest code is built into the demo, it's a guarantee to remove the plugin and add it back
+tns plugin remove nativescript-yourplugin
+tns plugin add ..
+
+// manual platform adds
+tns platform add ios
+// and/or
+tns platform add android
+```
 
 This seed expands on several things [presented here](http://developer.telerik.com/featured/creating-nativescript-plugins-in-typescript/).
+
 
 ## Usage
 
@@ -34,32 +73,6 @@ Take a look at these existing plugins for how that can be done very simply:
 * [nativescript-cardview](https://github.com/bradmartin/nativescript-cardview/tree/master/platforms)
 * [nativescript-floatingactionbutton](https://github.com/bradmartin/nativescript-floatingactionbutton/tree/master/platforms)
 
-### Typical development workflow:
-
-1. Make changes to plugin files
-2. Make changes in `demo` that would test those changes out
-3. `npm run demo.ios` or `npm run demo.android`  **(must be run from the root directory)**
-
-Those `demo` tasks are just general helpers. You may want to have more granular control on the device and/or emulator you want to run. For that, you can just run things the manual way:
-
-```
-cd demo
-
-// when developing, to ensure the latest code is built into the demo, it's a guarantee to remove the plugin and add it back
-tns plugin remove nativescript-yourplugin
-tns plugin add ..
-
-// manual platform adds
-tns platform add ios
-// and/or
-tns platform add android
-```
-
-Then use any of the available options from the `tns` command line:
-
-* [Emulate your project](https://github.com/NativeScript/nativescript-cli#emulate-your-project)
-* [Run your project](https://github.com/NativeScript/nativescript-cli#run-your-project)
-* [Full list of commands](https://github.com/NativeScript/nativescript-cli#the-commands)
 
 ## Unittesting
 This plugin automatically adds Jasmine-based unittest support to your plugin.
@@ -78,9 +91,12 @@ npm run test.android
 
 When you have everything ready to publish:
 
-* Bump the version number in `package.json`
-* `npm run build` - **very important** - ensure the latest is built **before** you publish
-* `npm publish`
+* Bump the version number in `src/package.json`
+* Go to `publish` and execute `publish.sh`
+
+If you just want to create a package, go to `publish` and execute `pack.sh`. The package will be created in `publish/package` folder.
+
+**NOTE**: To run bash script on Windows you can install [GIT SCM](https://git-for-windows.github.io/) and use Git Bash.
 
 ## TravisCI
 
