@@ -1,4 +1,5 @@
 import { Observable } from 'data/observable';
+import { CustomComponent } from './ui/custom-component';
 export declare class Common extends Observable {
     message: string;
     constructor();
@@ -6,4 +7,6 @@ export declare class Common extends Observable {
 }
 export declare class Utils {
     static SUCCESS_MSG(): string;
+}
+export declare class YourPluginUI extends CustomComponent {
 }

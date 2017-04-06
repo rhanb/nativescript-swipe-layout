@@ -26,4 +26,3 @@ export class Utils {
     return msg;
   }
 }
-
