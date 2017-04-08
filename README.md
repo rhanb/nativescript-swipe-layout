@@ -24,7 +24,7 @@ What seed gives out of the box?
 * a proper `.gitignore` to keep GitHub tidy 
 * a proper `.npmignore` to ensure everyone is happy when you publish your plugin via npm.
 
-![Plugin seed demo](https://github.com/NativeScript/nativescript-plugin-seed/blob/master/demo.png?raw=true)
+![Plugin seed demo](https://github.com/NativeScript/nativescript-plugin-seed/blob/master/screenshots/demo.png?raw=true)
 
 
 ##  2. <a name='PluginFolderStructure'></a>Plugin folder structure 
