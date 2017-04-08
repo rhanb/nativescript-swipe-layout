@@ -5,16 +5,15 @@
 * [Getting started](#Gettingstarted)
 	* [Development setup](#Developmentsetup)
 	* [Usage setup](#Usagesetup)
-* [Usage](#Usage)
-	* [Linking to CocoaPod or Android Arsenal plugins](#LinkingtoCocoaPodorAndroidArsenalplugins)
+* [Linking to CocoaPod or Android Arsenal plugins](#LinkingtoCocoaPodorAndroidArsenalplugins)
 * [Unittesting](#Unittesting)
 * [Publish to NPM](#PublishtoNPM)
 * [TravisCI](#TravisCI)
 
 ##  1. <a name='WhatisaNativeScriptpluginseed'></a>What is NativeScript plugin seed?
 
-The NativeScript plugin seed is built to be used as a starting point by NativeScript plugin developers. 
-What the seed gives out of the box?
+The NativeScript plugin seed is built to be used as a starting point by NativeScript plugin developers. It expands on several things [presented here](http://developer.telerik.com/featured/creating-nativescript-plugins-in-typescript/).
+What does the seed give you out of the box?
 * the plugin structure with option for easy development and debugging (see [Development setup section](#Developmentsetup) below)
 * a simple working plugin
 * a demo project working with the plugin. It is useful during development and for running tests via Travis CI
@@ -25,7 +24,6 @@ What the seed gives out of the box?
 * a proper `.npmignore` to ensure everyone is happy when you publish your plugin to NPM.
 
 ![Plugin seed demo](https://github.com/NativeScript/nativescript-plugin-seed/blob/master/screenshots/demo.png?raw=true)
-
 
 ##  2. <a name='PluginFolderStructure'></a>Plugin folder structure 
 
@@ -96,8 +94,8 @@ What the seed gives out of the box?
 |src/platform/android| Plugin Android specific configuration|
 |src/platform/ios|Plugin ios specific configuration|
 |src/README|You plugin README file explaining how other developers can use your plugin in their applications. Used when you publish your plugin to NPM|
-|src/scripts|Contains the postclone script run when you execute `npm run postclone`. Feel free to delete it|
-|publish|Contains shell script to create your package. Read more on creating a packing and publishing in the sections below|
+|src/scripts|The postclone script run when you execute `npm run postclone`. Feel free to delete it after you have executed the postclone step from the [Getting started](#Gettingstarted) section|
+|publish|A shell script to create your package. Read more on creating a package and publishing in the (Publish to NPM)[#Publishtonpm] section|
 |README.md|A guide for developers who want to contribute to your plugin. Visible in github only|
 
 
@@ -106,23 +104,18 @@ What the seed gives out of the box?
 1. Open command prompt/terminal and execute `git clone https://github.com/NativeScript/nativescript-plugin-seed myplugin` to clone the plugin seed repository into `myplugin` folder.
 2. Go to `myplugin/src` folder using `cd myplugin/src`
 3. Execute `npm run postclone` to configure:
-  - your github username
-  - your plugin name
-  - create a new repository for your plugin
+  * your github username - it will be changed in the package.json for you
+  * your plugin name - all files and classes in the seed will be renamed for you
+  * create a new repository for your plugin
 
-When you enter your plugin name, all files and classes in the seed will be renamed for you.
-
-Now you can continue with the development of your plugin by using the `Development setup` described below.
-If you just want to install the plugin and run the demo, continue with `Usage setup`
-
-4. Execute `npm run setup` to install plugin and demo dependencies
-5. Continue with [development setup](#Developmentsetup) (recommended) or [usage setup](#Usagesetup)
+Now you can continue with the development of your plugin by using the [Development setup](#Developmentsetup) described below.
+If you just want to install the plugin and run the demo, continue with [Usage setup]((#Usagesetup).
 
 ###  3.1. <a name='Developmentsetup'></a>Development setup
 For easier development and debugging purposes continue with the following steps:
 
-1. Make sure your plugin is not added as dependency from the demo project
-2. In command prompt/terminal navigate to `src` folder and execute `npm run development.setup` - this will add a sym link to the plugin code in the demo project allowing you to do changes and review them in the demo without adding/removing the plugin. [Read more about npm link](https://docs.npmjs.com/cli/link)
+1. Make sure your plugin is not added as dependency in the demo project (check `dependencies` in `demo/package.json`)
+2. In command prompt/terminal navigate to `src` folder and execute `npm run development.setup` - this will install plugin and demo dependencies and will add a sym link to the plugin code in the demo project allowing you to do changes and review them in the demo without adding/removing the plugin every time you make a change. [Read more about npm link](https://docs.npmjs.com/cli/link)
 3. Open `demo/package.json` and update `dependencies` key to add a dependency to your plugin:
 
 ```
@@ -140,13 +133,9 @@ In case you just want to install the plugin and run the demo continue with the f
 2. Execute `npm run setupandinstall` to install plugin and demo dependencies and to install plugin to the demo
 3. Navigate to `demo` folder and execute `tns run android` or `tns run ios` to preview the demo in emulator
 
-This seed expands on several things [presented here](http://developer.telerik.com/featured/creating-nativescript-plugins-in-typescript/).
+##  4. <a name='Usage'></a>Linking to CocoaPod or Android Arsenal plugins
 
-##  4. <a name='Usage'></a>Usage
-
-###  4.1. <a name='LinkingtoCocoaPodorAndroidArsenalplugins'></a>Linking to CocoaPod or Android Arsenal plugins
-
-You will want to create these folders and files in the `src` folder:
+You will want to create these folders and files in the `src` folder in order to use native APIs:
 
 ```
 platforms --
@@ -170,7 +159,7 @@ Open `demo/app/tests/tests.js` and adjust its contents as you wish.
 
 You can read more about this topic [here](https://docs.nativescript.org/tooling/testing).
 
-Once you're ready to test your plugin's API go to `src` folder and execute one of these commands in the plugin root:
+Once you're ready to test your plugin's API go to `src` folder and execute one of these commands:
 
 ```
 npm run test.ios

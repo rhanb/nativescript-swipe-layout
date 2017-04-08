@@ -23,7 +23,7 @@
     "setupandinstall": "npm i && cd ../demo && npm i && cd ../src && npm run build && cd ../demo && tns plugin add ../src && cd ../src",
     "postclone": "npm i && node scripts/postclone.js",
     "prepublish": "npm run build",
-    "development.setup": "npm link && cd ../demo && npm link nativescript-yourplugin && cd ../src"
+    "development.setup": "npm run setup && npm link && cd ../demo && npm link nativescript-yourplugin && cd ../src"
   },
   "repository": {
     "type": "git",
