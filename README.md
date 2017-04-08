@@ -1,6 +1,6 @@
 # Develop a NativeScript plugin now (w/ TypeScript) [![Build Status](https://travis-ci.org/NativeScript/nativescript-plugin-seed.svg?branch=master)](https://travis-ci.org/NativeScript/nativescript-plugin-seed)
 
-* [What is a NativeScript plugin seed?](#WhatisaNpluginseed)
+* [What is NativeScript plugin seed?](#WhatisaNpluginseed)
 * [Plugin folder structure](#PluginFolderStructure)
 * [Getting started](#Gettingstarted)
 	* [Development setup](#Developmentsetup)
@@ -11,18 +11,18 @@
 * [Publish to NPM](#PublishtoNPM)
 * [TravisCI](#TravisCI)
 
-##  1. <a name='WhatisaNativeScriptpluginseed'></a>What is a NativeScript plugin seed?
+##  1. <a name='WhatisaNativeScriptpluginseed'></a>What is NativeScript plugin seed?
 
 The NativeScript plugin seed is built to be used as a starting point by NativeScript plugin developers. 
-What seed gives out of the box?
-* the plugin structure with option for easy development and debugging
+What the seed gives out of the box?
+* the plugin structure with option for easy development and debugging (see [Development setup section](#Developmentsetup) below)
 * a simple working plugin
-* a demo project working with the plugin. Useful during development and for running tests via Travis CI
+* a demo project working with the plugin. It is useful during development and for running tests via Travis CI
 * plugin tests
-* a guideline how to structure your plugin README
+* a guideline how to structure your plugin README file that will be published to NPM
 * a shell script to create your plugin package
 * a proper `.gitignore` to keep GitHub tidy 
-* a proper `.npmignore` to ensure everyone is happy when you publish your plugin via npm.
+* a proper `.npmignore` to ensure everyone is happy when you publish your plugin to NPM.
 
 ![Plugin seed demo](https://github.com/NativeScript/nativescript-plugin-seed/blob/master/screenshots/demo.png?raw=true)
 
