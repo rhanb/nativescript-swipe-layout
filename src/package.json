@@ -1,8 +1,8 @@
 {
-  "name": "nativescript-yourplugin",
+  "name": "nativescript-myplugin-vesy",
   "version": "1.0.0",
   "description": "Your awesome NativeScript plugin.",
-  "main": "yourplugin",
+  "main": "myplugin-vesy",
   "typings": "index.d.ts",
   "nativescript": {
     "platforms": {
@@ -18,16 +18,16 @@
     "test.ios": "cd ../demo && tns platform remove ios && tns test ios --emulator",
     "test.ios.device": "cd ../demo && tns platform remove ios && tns test ios",
     "test.android": "cd ../demo && tns platform remove android && tns test android --justlaunch",
-    "preparedemo": "npm run build && cd ../demo && tns plugin remove nativescript-yourplugin && tns plugin add ../src && tns install",
+    "preparedemo": "npm run build && cd ../demo && tns plugin remove nativescript-myplugin-vesy && tns plugin add ../src && tns install",
     "setup": "npm i && cd ../demo && npm i && cd ../src && npm run build",
     "setupandinstall": "npm i && cd ../demo && npm i && cd ../src && npm run build && cd ../demo && tns plugin add ../src && cd ../src",
     "postclone": "npm i && node scripts/postclone.js",
     "prepublish": "npm run build",
-    "development.setup": "npm link && cd ../demo && npm link nativescript-yourplugin && cd ../src"
+    "development.setup": "npm link && cd ../demo && npm link nativescript-myplugin-vesy && cd ../src"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/YourName/nativescript-yourplugin.git"
+    "url": "https://github.com/veselina.radeva/nativescript-myplugin-vesy.git"
   },
   "keywords": [
     "NativeScript",
@@ -40,10 +40,10 @@
     "email": "youremail@yourdomain.com"
   },
   "bugs": {
-    "url": "https://github.com/YourName/nativescript-yourplugin/issues"
+    "url": "https://github.com/veselina.radeva/nativescript-myplugin-vesy/issues"
   },
   "license": "MIT",
-  "homepage": "https://github.com/YourName/nativescript-yourplugin",
+  "homepage": "https://github.com/veselina.radeva/nativescript-myplugin-vesy",
   "readmeFilename": "README.md",
   "devDependencies": {
     "tns-core-modules": "~3.0.0",

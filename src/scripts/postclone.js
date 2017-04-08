@@ -28,7 +28,7 @@ function askGithubUsername() {
             return console.log(err);
         }
         if (!result.github_username) {
-            return console.log("Dude, the GitHub username is mandatory!");
+            return console.log("Your GitHub username is required to configure plugin's package.json.");
         }
         github_username = result.github_username;
         askPluginName();
@@ -44,7 +44,7 @@ function askPluginName() {
             return console.log(err);
         }
         if (!result.plugin_name) {
-            return console.log("Dude, the plugin name is mandatory!");
+            return console.log("Your plugin name is required to correct the file names and classes.");
         }
         plugin_name = result.plugin_name;
         generateClassName();
@@ -117,14 +117,13 @@ function adjustScripts() {
       }
     }
 
-    replaceReadMe();
+    initReadMe();
 }
 
-function replaceReadMe() {
-    var contents = fs.readFileSync(readme_template_file);
+function initReadMe() {
+    var contents = fs.readFileSync(readme_file);
+    contents = "# <<<< REPLACE THE CONTENT BELOW WITH THE DEVELOPMENT GUIDE OF YOUR PLUGIN.>>>>\n\n" + contents;
     fs.writeFileSync(readme_file, contents);
-    fs.unlinkSync(readme_template_file);
-    
     initGit();
 }
 
@@ -153,7 +152,7 @@ function initGit() {
         }
 
         console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
-        console.log("You can now run 'npm run setup' and start cracking!");
+        console.log("You can now continue with development or usage setup.!");
         
         process.exit();
     });

@@ -1,14 +1,14 @@
 import { Observable } from 'data/observable';
-import { YourPlugin } from 'nativescript-yourplugin';
+import { MypluginVesy } from 'nativescript-myplugin-vesy';
 
 export class HelloWorldModel extends Observable {
   public message: string;
-  private yourPlugin: YourPlugin;
+  private mypluginVesy: MypluginVesy;
 
   constructor() {
     super();
 
-    this.yourPlugin = new YourPlugin();
-    this.message = this.yourPlugin.message;
+    this.mypluginVesy = new MypluginVesy();
+    this.message = this.mypluginVesy.message;
   }
 }
