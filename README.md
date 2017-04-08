@@ -1,5 +1,3 @@
-# <<<< REPLACE THE CONTENT BELOW WITH THE DESCRIPTION OF YOUR PLUGIN.>>>>
-
 # Develop a NativeScript plugin now (w/ TypeScript) [![Build Status](https://travis-ci.org/NativeScript/nativescript-plugin-seed.svg?branch=master)](https://travis-ci.org/NativeScript/nativescript-plugin-seed)
 
 1. [What is a {N} plugin seed?](#WhatisaNpluginseed)

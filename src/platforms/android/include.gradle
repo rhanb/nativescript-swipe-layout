@@ -2,8 +2,8 @@
 
 android {
 	productFlavors {
-		"nativescript-myplugin-vesy" {
-			dimension "nativescript-myplugin-vesy"
+		"nativescript-yourplugin" {
+			dimension "nativescript-yourplugin"
 		}
 	}
 }
