@@ -1,19 +1,19 @@
 # Develop a NativeScript plugin now (w/ TypeScript) [![Build Status](https://travis-ci.org/NativeScript/nativescript-plugin-seed.svg?branch=master)](https://travis-ci.org/NativeScript/nativescript-plugin-seed)
 
-1. [What is a {N} plugin seed?](#WhatisaNpluginseed)
-2. [Plugin Folder Structure](#PluginFolderStructure)
-3. [Getting started](#Gettingstarted)
-	3.1. [Development setup](#Developmentsetup)
-	3.2. [Usage setup](#Usagesetup)
-4. [Usage](#Usage)
-	4.1. [Linking to CocoaPod or Android Arsenal plugins](#LinkingtoCocoaPodorAndroidArsenalplugins)
-5. [Unittesting](#Unittesting)
-6. [Publish](#Publish)
-7. [TravisCI](#TravisCI)
+* [What is a NativeScript plugin seed?](#WhatisaNpluginseed)
+* [Plugin folder structure](#PluginFolderStructure)
+* [Getting started](#Gettingstarted)
+	* [Development setup](#Developmentsetup)
+	* [Usage setup](#Usagesetup)
+* [Usage](#Usage)
+	* [Linking to CocoaPod or Android Arsenal plugins](#LinkingtoCocoaPodorAndroidArsenalplugins)
+* [Unittesting](#Unittesting)
+* [Publish to NPM](#PublishtoNPM)
+* [TravisCI](#TravisCI)
 
-##  1. <a name='WhatisaNpluginseed'></a>What is a {N} plugin seed?
+##  1. <a name='WhatisaNativeScriptpluginseed'></a>What is a NativeScript plugin seed?
 
-The {N} plugin seed is built to be used as a starting point by {N} plugin developers. 
+The NativeScript plugin seed is built to be used as a starting point by NativeScript plugin developers. 
 What seed gives out of the box?
 * the plugin structure with option for easy development and debugging
 * a simple working plugin
@@ -24,7 +24,10 @@ What seed gives out of the box?
 * a proper `.gitignore` to keep GitHub tidy 
 * a proper `.npmignore` to ensure everyone is happy when you publish your plugin via npm.
 
-##  2. <a name='PluginFolderStructure'></a>Plugin Folder Structure 
+![Plugin seed demo](https://github.com/NativeScript/nativescript-plugin-seed/blob/master/demo.png?raw=true)
+
+
+##  2. <a name='PluginFolderStructure'></a>Plugin folder structure 
 
 ```
 .
@@ -39,7 +42,18 @@ What seed gives out of the box?
 │   │   │   └── iOS
 │   │   │       ├── Info.plist
 │   │   │       └── build.xcconfig
+│   │   ├── app.css
+│   │   ├── app.ts
+│   │   ├── main-page.ts
+│   │   ├── main-page.xml
+│   │   ├── main-view-model.ts
+│   │   ├── package.json
 │   │   └── tests
+│   │       └── tests.js
+│   ├── karma.conf.js
+│   ├── package.json
+│   ├── references.d.ts
+│   └── tsconfig.json
 ├── publish
 │   ├── pack.sh
 │   ├── package.json
@@ -57,8 +71,20 @@ What seed gives out of the box?
     │       ├── Info.plist
     │       ├── README.md
     │       └── build.xcconfig
+    ├── references.d.ts
     ├── scripts
+    │   └── postclone.js
+    ├── tsconfig.json
     ├── ui
+    │   ├── custom-component.d.ts
+    │   ├── custom-component.ts
+    │   └── custom-component.xml
+    ├── yourplugin.android.d.ts
+    ├── yourplugin.android.ts
+    ├── yourplugin.common.d.ts
+    ├── yourplugin.common.ts
+    ├── yourplugin.ios.d.ts
+    └── yourplugin.ios.ts
 ```
 
 |Folder/File name| Description
@@ -78,7 +104,7 @@ What seed gives out of the box?
 ##  3. <a name='Gettingstarted'></a>Getting started
 
 1. Open command prompt/terminal and execute `git clone https://github.com/NativeScript/nativescript-plugin-seed myplugin` to clone the plugin seed repository into `myplugin` folder.
-2. Go to `myplugin\src` folder using `cd myplugin/src`
+2. Go to `myplugin/src` folder using `cd myplugin/src`
 3. Execute `npm run postclone` to configure:
   - your github username
   - your plugin name
@@ -100,7 +126,7 @@ For easier development and debugging purposes continue with the following steps:
 3. Open `demo/package.json` and update `dependencies` key to add a dependency to your plugin:
 
 ```
-"nativescript-yourplugin-name": "*"
+"nativescript-yourplugin": "*"
 ```  
 
 4. Open command prompt/terminal, navigate to `src` folder and run `tsc -w`
@@ -120,7 +146,7 @@ This seed expands on several things [presented here](http://developer.telerik.co
 
 ###  4.1. <a name='LinkingtoCocoaPodorAndroidArsenalplugins'></a>Linking to CocoaPod or Android Arsenal plugins
 
-You will want to create these folders and files in the root:
+You will want to create these folders and files in the `src` folder:
 
 ```
 platforms --
@@ -151,7 +177,7 @@ npm run test.ios
 npm run test.android
 ```
 
-##  6. <a name='Publish'></a>Publish to NPM
+##  6. <a name='PublishtoNPM'></a>Publish to NPM
 
 When you have everything ready to publish:
 
