@@ -27,64 +27,6 @@ What does the seed give you out of the box?
 
 ##  2. <a name='PluginFolderStructure'></a>Plugin folder structure 
 
-```
-.
-├── LICENSE
-├── README.md
-├── demo
-│   ├── app
-│   │   ├── App_Resources
-│   │   │   ├── Android
-│   │   │   │   ├── AndroidManifest.xml
-│   │   │   │   ├── app.gradle
-│   │   │   └── iOS
-│   │   │       ├── Info.plist
-│   │   │       └── build.xcconfig
-│   │   ├── app.css
-│   │   ├── app.ts
-│   │   ├── main-page.ts
-│   │   ├── main-page.xml
-│   │   ├── main-view-model.ts
-│   │   ├── package.json
-│   │   └── tests
-│   │       └── tests.js
-│   ├── karma.conf.js
-│   ├── package.json
-│   ├── references.d.ts
-│   └── tsconfig.json
-├── publish
-│   ├── pack.sh
-│   ├── package.json
-│   └── publish.sh
-└── src
-    ├── README.md
-    ├── index.d.ts
-    ├── package.json
-    ├── platforms
-    │   ├── android
-    │   │   ├── AndroidManifest.xml
-    │   │   ├── README.md
-    │   │   └── include.gradle
-    │   └── ios
-    │       ├── Info.plist
-    │       ├── README.md
-    │       └── build.xcconfig
-    ├── references.d.ts
-    ├── scripts
-    │   └── postclone.js
-    ├── tsconfig.json
-    ├── ui
-    │   ├── custom-component.d.ts
-    │   ├── custom-component.ts
-    │   └── custom-component.xml
-    ├── yourplugin.android.d.ts
-    ├── yourplugin.android.ts
-    ├── yourplugin.common.d.ts
-    ├── yourplugin.common.ts
-    ├── yourplugin.ios.d.ts
-    └── yourplugin.ios.ts
-```
-
 |Folder/File name| Description
 |---|---|
 |demo| The plugin demo source code|
@@ -95,35 +37,36 @@ What does the seed give you out of the box?
 |src/platform/ios|Plugin ios specific configuration|
 |src/README|You plugin README file explaining how other developers can use your plugin in their applications. Used when you publish your plugin to NPM|
 |src/scripts|The postclone script run when you execute `npm run postclone`. Feel free to delete it after you have executed the postclone step from the [Getting started](#Gettingstarted) section|
-|publish|A shell script to create your package. Read more on creating a package and publishing in the (Publish to NPM)[#Publishtonpm] section|
-|README.md|A guide for developers who want to contribute to your plugin. Visible in github only|
+|publish|Contains a shell script to create and publish your package. Read more on creating a package and publishing in the (Publish to NPM)[#Publishtonpm] section|
+|README|A guide for developers who want to contribute to your plugin. Visible in github only|
 
 
 ##  3. <a name='Gettingstarted'></a>Getting started
 
-1. Open a command prompt/terminal and execute `git clone https://github.com/NativeScript/nativescript-plugin-seed nativescript-myplugin` to clone the plugin seed repository into `nativescript-myplugin` folder.
-2. Go to `nativescript-myplugin/src` folder using `cd nativescript-myplugin/src`
-3. Execute `npm run postclone` to configure:
-  * your github username - it will be changed in the package.json for you
-  * your plugin name - all files and classes in the seed will be renamed for you
-  * create a new repository for your plugin
+1. Open command prompt/terminal and execute `git clone https://github.com/NativeScript/nativescript-plugin-seed myplugin` to clone the plugin seed repository into `myplugin` folder.
+2. Go to `myplugin/src` folder using `cd myplugin/src`
+3. Execute `npm run postclone` to:
+    * configure your github username - it will be changed in the package.json for you
+    * configure your plugin name - all files and classes in the seed will be renamed for you
+    * stub your plugin README file
+    * create a new repository for your plugin
 
 Now you can continue with the development of your plugin by using the [Development setup](#Developmentsetup) described below.
-If you just want to install the plugin and run the demo, continue with [Usage setup]((#Usagesetup).
+If you just want to install the plugin and run the demo, continue with [Usage setup](#Usagesetup).
 
 ###  3.1. <a name='Developmentsetup'></a>Development setup
 For easier development and debugging purposes continue with the following steps:
 
 1. Make sure your plugin is not added as dependency in the demo project (check `dependencies` in `demo/package.json`)
-2. In command prompt/terminal navigate to `src` folder and execute `npm run development.setup` - this will install the plugin and demo dependencies and will add a sym link to the plugin code in the demo project allowing you to do changes and review them in the demo without adding/removing the plugin every time you make a change. [Read more about npm link](https://docs.npmjs.com/cli/link). If you encounter an "EACCES" permission denied error, please fix you global npm permissions, which is perfectly explained [here]()https://docs.npmjs.com/getting-started/fixing-npm-permissions).
+2. In command prompt/terminal navigate to `src` folder and execute `npm run development.setup` - this will install plugin and demo dependencies and will add a sym link to the plugin code in the demo project allowing you to do changes and review them in the demo without adding/removing the plugin every time you make a change. [Read more about npm link](https://docs.npmjs.com/cli/link)
 3. Open `demo/package.json` and update `dependencies` key to add a dependency to your plugin:
 
 ```
 "nativescript-yourplugin": "*"
 ```  
 
-4. Open a command prompt/terminal, navigate to `src` folder and run `tsc -w` to watch for file changes.
-5. Open another command prompt/terminal, navigate to `demo` folder and run `tns run android --syncAllFiles` or `tns run ios --syncAllFiles`.
+4. Open command prompt/terminal, navigate to `src` folder and run `tsc -w`
+5. Open command prompt/terminal, navigate to `demo` folder and run `tns run android --syncAllFiles` or `tns run ios --syncAllFiles`
 6. Now go and make a change to your plugin. It will be automatically applied to the demo project.
 
 ###  3.2. <a name='Usagesetup'></a>Usage setup
@@ -171,7 +114,7 @@ npm run test.android
 When you have everything ready to publish:
 
 * Bump the version number in `src/package.json`
-* Go to `publish` and execute `publish.sh` (run `chmod +x *.sh` if the file isn't executable)
+* Go to `publish` and execute `publish.sh`
 
 If you just want to create a package, go to `publish` folder and execute `pack.sh`. The package will be created in `publish/package` folder.
 

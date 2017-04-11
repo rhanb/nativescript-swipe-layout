@@ -14,6 +14,7 @@ var plugin_name,
   init_git,
   readme_template_file = "README.md",
   readme_file = "../README.md";
+  screenshots_dir = "../screenshots";
 
 console.log('NativeScript Plugin Seed Configuration');
 prompt.start();
@@ -121,11 +122,15 @@ function adjustScripts() {
 }
 
 function initReadMe() {
-    var contents = fs.readFileSync(readme_file);
-    contents = "# <<<< REPLACE THE CONTENT BELOW WITH THE DEVELOPMENT GUIDE OF YOUR PLUGIN.>>>>\n\n" + contents;
+    var contents = fs.readFileSync(readme_template_file);
     fs.writeFileSync(readme_file, contents);
+    fs.unlinkSync(readme_template_file);
+
+    rimraf(screenshots_dir, function () { 
+        console.log('Screenshots removed.'); 
+    });
     initGit();
-}
+ }
 
 function initGit() {
     prompt.get({
