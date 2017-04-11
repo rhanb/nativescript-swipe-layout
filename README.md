@@ -35,11 +35,9 @@ What does the seed give you out of the box?
 |src/ui|The plugin UI (for UI plugins). If your plugin doesn't have any UI, you can delete this folder|
 |src/platform/android| Plugin Android specific configuration|
 |src/platform/ios|Plugin ios specific configuration|
-|src/README|You plugin README file explaining how other developers can use your plugin in their applications. Used when you publish your plugin to NPM|
+|src/README|You plugin README stub explaining how other developers can use your plugin in their applications. Used when you publish your plugin to NPM. On postclone step, the README in the root is replaced with this one.|
 |src/scripts|The postclone script run when you execute `npm run postclone`. Feel free to delete it after you have executed the postclone step from the [Getting started](#Gettingstarted) section|
 |publish|Contains a shell script to create and publish your package. Read more on creating a package and publishing in the (Publish to NPM)[#Publishtonpm] section|
-|README|A guide for developers who want to contribute to your plugin. Visible in github only|
-
 
 ##  3. <a name='Gettingstarted'></a>Getting started
 
