@@ -1,4 +1,4 @@
-# Develop a NativeScript plugin now (w/ TypeScript)
+# Develop a NativeScript plugin
 
 ## Getting started
 
