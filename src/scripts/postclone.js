@@ -137,23 +137,29 @@ function initGit() {
             return console.log(err);
         }
         if (result.init_git && result.init_git.toLowerCase() === 'y') {
-            rimraf.sync('.git');
-            exec('git init -q .', function(err, stdout, stderr) {
+            rimraf.sync('../.git');
+            exec('git init -q ..', function(err, stdout, stderr) {
                 if (err) {
                     console.log(err);
+                    finishSetup();
                 } else {
-                    exec("git add '*' '.*'", function(err, stdout, stderr) {
+                    exec("git add '../*' '../.*'", function(err, stdout, stderr) {
                         if (err) {
                             console.log(err);
                         }
+                        finishSetup();
                     });
                 }
             });
+        } else {
+          finishSetup();
         }
-
-        console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
-        console.log("You can now continue with development or usage setup!");
-        
-        process.exit();
     });
+}
+
+function finishSetup() {
+  console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
+  console.log("You can now continue with development or usage setup!");
+
+  process.exit();
 }
