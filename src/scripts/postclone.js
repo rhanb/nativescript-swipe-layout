@@ -152,7 +152,7 @@ function initGit() {
         }
 
         console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
-        console.log("You can now continue with development or usage setup.!");
+        console.log("You can now continue with development or usage setup!");
         
         process.exit();
     });
