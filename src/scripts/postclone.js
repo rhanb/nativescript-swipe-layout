@@ -127,9 +127,9 @@ function initReadMe() {
     fs.unlinkSync(readme_template_file);
 
     rimraf(screenshots_dir, function () { 
-        console.log('Screenshots removed.'); 
-    });
-    initGit();
+        console.log('Screenshots removed.');
+        initGit();
+    });    
  }
 
 function initGit() {
