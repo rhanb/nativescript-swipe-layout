@@ -35,9 +35,9 @@ What does the seed give you out of the box?
 |src/ui|The plugin UI (for UI plugins). If your plugin doesn't have any UI, you can delete this folder|
 |src/platform/android| Plugin Android specific configuration|
 |src/platform/ios|Plugin ios specific configuration|
-|src/README|You plugin README stub explaining how other developers can use your plugin in their applications. Used when you publish your plugin to NPM. On postclone step, the README in the root is replaced with this one.|
+|src/README|Your plugin README stub explaining how other developers can use your plugin in their applications. Used when you publish your plugin to NPM. On postclone step, the README in the root is replaced with this one.|
 |src/scripts|The postclone script run when you execute `npm run postclone`. Feel free to delete it after you have executed the postclone step from the [Getting started](#Gettingstarted) section|
-|publish|Contains a shell script to create and publish your package. Read more on creating a package and publishing in the (Publish to NPM)[#Publishtonpm] section|
+|publish|Contains a shell script to create and publish your package. Read more on creating a package and publishing in the [Publish to NPM](#Publishtonpm) section|
 
 ##  3. <a name='Gettingstarted'></a>Getting started
 
@@ -56,23 +56,23 @@ If you just want to install the plugin and run the demo, continue with [Usage se
 For easier development and debugging purposes continue with the following steps:
 
 1. Make sure your plugin is not added as dependency in the demo project (check `dependencies` in `demo/package.json`)
-2. In command prompt/terminal navigate to `src` folder and execute `npm run development.setup` - this will install plugin and demo dependencies and will add a sym link to the plugin code in the demo project allowing you to do changes and review them in the demo without adding/removing the plugin every time you make a change. [Read more about npm link](https://docs.npmjs.com/cli/link)
+2. In command prompt/terminal navigate to `src` folder and execute `npm run development.setup` - this will install plugin and demo dependencies and will add a sym link to the plugin code in the demo project allowing you to do changes and review them in the demo without adding/removing the plugin every time you make a change. [Read more about npm link](https://docs.npmjs.com/cli/link).
 3. Open `demo/package.json` and update `dependencies` key to add a dependency to your plugin:
 
 ```
 "nativescript-yourplugin": "*"
 ```  
 
-4. Open command prompt/terminal, navigate to `src` folder and run `tsc -w`
-5. Open command prompt/terminal, navigate to `demo` folder and run `tns run android --syncAllFiles` or `tns run ios --syncAllFiles`
+4. Open command prompt/terminal, navigate to `src` folder and run `tsc -w`.
+5. Open command prompt/terminal, navigate to `demo` folder and run `tns run android --syncAllFiles` or `tns run ios --syncAllFiles`.
 6. Now go and make a change to your plugin. It will be automatically applied to the demo project.
 
 ###  3.2. <a name='Usagesetup'></a>Usage setup
 In case you just want to install the plugin and run the demo continue with the following steps:
 
-1. Open command prompt/terminal and navigate to `src` folder
-2. Execute `npm run setupandinstall` to install plugin and demo dependencies and to install plugin to the demo
-3. Navigate to `demo` folder and execute `tns run android` or `tns run ios` to preview the demo in emulator
+1. Open command prompt/terminal and navigate to `src` folder.
+2. Execute `npm run setupandinstall` to install plugin and demo dependencies and to install plugin to the demo.
+3. Navigate to `demo` folder and execute `tns run android` or `tns run ios` to preview the demo in emulator.
 
 ##  4. <a name='Usage'></a>Linking to CocoaPod or Android Arsenal plugins
 
