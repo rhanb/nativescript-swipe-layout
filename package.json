@@ -6,8 +6,8 @@
   "typings": "index.d.ts",
   "nativescript": {
     "platforms": {
-      "android": "2.5.0",
-      "ios": "2.5.0"
+      "android": "3.0.0",
+      "ios": "3.0.0"
     }
   },
   "scripts": {
@@ -43,9 +43,9 @@
   "homepage": "https://github.com/YourName/nativescript-yourplugin",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "tns-core-modules": "~2.5.2",
-    "tns-platform-declarations": "~2.5.2",
-    "typescript": "~2.1.0",
+    "tns-core-modules": "~3.0.0",
+    "tns-platform-declarations": "^3.0.1",
+    "typescript": "~2.2.1",
     "prompt": "~1.0.0",
     "rimraf": "~2.5.0"
   }
