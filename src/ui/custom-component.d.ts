@@ -1,7 +1,6 @@
 import { GridLayout } from 'ui/layouts/grid-layout';
-import { Property } from 'ui/core/dependency-observable';
+import { Property } from 'ui/core/view';
 export declare class CustomComponent extends GridLayout {
-    static messageProperty: Property;
-    message: string;
     constructor();
 }
+export declare const messageProperty: Property<CustomComponent, string>;
