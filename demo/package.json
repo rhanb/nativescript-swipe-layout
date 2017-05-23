@@ -11,7 +11,7 @@
   "dependencies": {
     "nativescript-theme-core": "^1.0.4",
     "nativescript-unit-test-runner": "^0.3.4",
-    "tns-core-modules": "^3.0.0 || ^3.0.0-rc.1"
+    "tns-core-modules": "^3.0.0"
   },
   "devDependencies": {
     "babel-traverse": "6.12.0",
