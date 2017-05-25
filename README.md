@@ -1,4 +1,6 @@
-# Develop a NativeScript plugin now (w/ TypeScript) [![Build Status](https://travis-ci.org/NativeScript/nativescript-plugin-seed.svg?branch=master)](https://travis-ci.org/NativeScript/nativescript-plugin-seed)
+# Develop a NativeScript plugin [![Build Status](https://travis-ci.org/NativeScript/nativescript-plugin-seed.svg?branch=master)](https://travis-ci.org/NativeScript/nativescript-plugin-seed)
+
+> This repo is heavily based on the work [@NathanWalker](https://github.com/NathanWalker) did with [his seed](https://github.com/NathanWalker/nativescript-plugin-seed) to make NativeScript plugin seed a reality. Thanks Nathan!
 
 * [What is NativeScript plugin seed?](#WhatisaNpluginseed)
 * [Plugin folder structure](#PluginFolderStructure)
