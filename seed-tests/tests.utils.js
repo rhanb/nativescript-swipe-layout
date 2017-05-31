@@ -71,7 +71,10 @@ exports.copySeedDir = function copySeedDir(seedLocation, copyLocation, callback)
 };
 
 exports.callPostclone = function callPostclone(seedLocation, githubUsername, pluginName, initGit, callback) {
-    exec("cd " + seedLocation + "/src && npm run postclone -- gitHubUsername=" + githubUsername + " pluginName=" + pluginName + " initGit=" + initGit, function(error, stdout, stderr) {
+    var postcloneScript = getPackageJsonPostcloneScript();
+    postcloneScript = postcloneScript.replace("postclone.js", "postclone.js gitHubUsername=" + githubUsername + " pluginName=" + pluginName + " initGit=" + initGit);
+
+    exec("cd " + seedLocation + "/src && " + postcloneScript, function(error, stdout, stderr) {
         callback(error, stdout, stderr);
     });
 };
@@ -100,4 +103,19 @@ exports.removeNpmLink = function removeNpmLink(packageName, callback) {
     exec("npm remove " + packageName + " -g", function(error, stdout, stderr) {
         callback();
     });
+}
+
+function getPackageJsonPostcloneScript() {
+    var packageJsonFile = constants.SEED_COPY_LOCATION + "/src/package.json";
+      
+      if (fs.lstatSync(packageJsonFile).isFile()) {
+        var packageJson = JSON.parse(fs.readFileSync(packageJsonFile, 'utf8'));
+        var packageJsonScripts = packageJson["scripts"];
+
+        if(packageJsonScripts && packageJsonScripts["postclone"]) {
+            return packageJsonScripts["postclone"];
+        };
+      }
+
+      return "";
 }

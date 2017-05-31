@@ -11,22 +11,15 @@
         }
     },
     "scripts": {
-        "build": "tsc -skipLibCheck",
-        "demo.ios": "npm run preparedemo && cd ../demo && tns run ios --emulator",
-        "demo.ios.device": "npm run preparedemo && cd ../demo && tns platform remove ios && tns run ios",
-        "demo.android": "npm run preparedemo && cd ../demo && tns platform remove android && tns run android --justlaunch",
-        "test": "npm run tslint && npm run tslint.demo && cd ../demo && tns build ios && tns build android",
-        "test.ios": "cd ../demo && tns platform remove ios && tns test ios --emulator",
-        "test.ios.device": "cd ../demo && tns platform remove ios && tns test ios",
-        "test.android": "cd ../demo && tns platform remove android && tns test android --justlaunch",
-        "preparedemo": "npm run build && cd ../demo && tns plugin remove nativescript-yourplugin && tns plugin add ../src && tns install",
-        "setup": "npm i && cd ../demo && npm i && cd ../src && npm run build",
-        "setupandinstall": "npm i && cd ../demo && npm i && cd ../src && npm run build && cd ../demo && tns plugin add ../src && cd ../src",
-        "tslint": "tslint *.ts --config ../tslint.json",
-        "tslint.demo": "tslint ../demo/app/*.ts",
-        "postclone": "npm i && node scripts/postclone.js",
-        "prepublish": "npm run build && npm run tslint",
-        "development.setup": "npm run setup && npm link && cd ../demo && npm link nativescript-yourplugin && cd ../src"
+        "tsc": "tsc -skipLibCheck",
+
+        "postclone": "npm i && node scripts/postclone.js && cd ../demo && npm i && cd ../src && npm run plugin.link ",
+        "test": "npm run tslint && cd ../demo && tns build ios && tns build android && tns test ios && tns test android",
+        "tslint": "cd ../ && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\"",
+        "plugin.link": "npm link && cd ../demo && npm link nativescript-yourplugin && cd ../src",
+        "plugin.tscwatch": "npm run tsc -- -w",
+        "demo.ios": "cd ../demo && tns run ios --syncAllFiles",
+        "demo.android": "cd ../demo && tns run android --syncAllFiles"
     },
     "repository": {
         "type": "git",
@@ -59,5 +52,6 @@
         "rimraf": "^2.5.0",
         "tslint": "^5.0.0"
     },
-    "dependencies": {}
+    "dependencies": {},
+    "bootstrapper": "nativescript-plugin-seed"
 }

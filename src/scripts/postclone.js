@@ -75,7 +75,13 @@ function askPluginName() {
             if (!result.plugin_name) {
                 return console.log("Your plugin name is required to correct the file names and classes.");
             }
+
             inputParams.plugin_name = result.plugin_name;
+
+            if(inputParams.plugin_name.startsWith("nativescript-")){
+               inputParams.plugin_name = inputParams.plugin_name.replace("nativescript-", "");
+            }
+
             generateClassName();
         });
     }
@@ -206,7 +212,7 @@ function initGit() {
 
 function finishSetup() {
     console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
-    console.log("You can now continue with development or usage setup!");
+    console.log("You can now continue by running 'npm run plugin.tscwatch' in this window and in another one - 'npm run demo.ios' or 'npm run demo.android'!");
 
     process.exit();
 }

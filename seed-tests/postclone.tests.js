@@ -6,8 +6,6 @@ var constants = require("./tests.constants");
 
 var _srcReadmeContent = "";
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000; // 60 secs
-
 describe('postclone', function() {
 
     // keep before 'should not init new git repo' 
@@ -43,7 +41,7 @@ describe('postclone', function() {
                     done.fail(err);
                 } else {
                     exec("cd " + constants.SEED_COPY_LOCATION + " && git config --get remote.origin.url", function(error, stdout, stderr) {
-                        expect(stdout).toEqual("git@github.com:NativeScript/nativescript-plugin-seed.git\n");
+                        expect(stdout).toContain("NativeScript/nativescript-plugin-seed.git");
                         done();
                     });
                 }
@@ -129,5 +127,24 @@ describe('postclone', function() {
             expect(resultsCount).toBeGreaterThan(0);
             done();
         });
+    });
+
+    it('should create an npm link to the src folder', function(done) {
+        testUtils.getNpmLinks(function(links) {
+            var expectedLink = links.filter(function(item) {
+                return item.startsWith("nativescript-" + constants.TEST_PLUGIN_NAME + "@1.0.0") && item.endsWith(constants.SEED_COPY_LOCATION + "/src");
+            });
+
+            expect(expectedLink.length).toEqual(1);
+            done();
+        });
+    });
+
+    it('should link the plugin in the demo folder', function(done) {
+        var demoPluginPackageJson = constants.SEED_COPY_LOCATION + "/demo/node_modules/nativescript-" + constants.TEST_PLUGIN_NAME + "/package.json";
+        var srcPluginPackageJson = constants.SEED_COPY_LOCATION + "/src/package.json";
+
+        expect(fs.realpathSync(demoPluginPackageJson)).toEqual(fs.realpathSync(srcPluginPackageJson));
+        done();
     });
 });
