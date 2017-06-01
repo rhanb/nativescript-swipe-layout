@@ -1,11 +1,19 @@
 var exec = require('child_process').exec; // TODO: do we need it?
 var ncp = require('ncp').ncp;
+var rimraf = require('rimraf');
+const SEED_LOCATION = "../";
+const SEED_COPY_LOCATION = "seed-copy";
 
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 describe('postclone', function() {
 
+    // TODO: extract helper functions for readability
     beforeAll(function(done) {
+        rimraf.sync(SEED_COPY_LOCATION);
+        console.log('Seed copy folder successfully deleted.');
+
         // clone the seed files
-        ncp("../", "./seed-copy", {
+        ncp(SEED_LOCATION, SEED_COPY_LOCATION, {
             filter: function(fileName) {
                 if (fileName.indexOf("seed-tests/seed-copy") > -1 ||
                     fileName.indexOf("demo/node_modules") > -1 ||
@@ -18,12 +26,15 @@ describe('postclone', function() {
             }
         }, function(err) {
             if (err) {
-                done();
-                // TODO: ?
-                return console.error(err);
+                done.fail(err);
             }
 
-            done();
+            console.log('Seed copy folder successfully created.');
+            exec("cd " + SEED_COPY_LOCATION + "/src && npm run postclone -- gitHubUsername=Toti pluginName=Plugina initGit=no", function(error, stdout, stderr) {
+                console.log(arguments);
+                expect(error).toBeNull();
+                done();
+            });
         });
     });
 

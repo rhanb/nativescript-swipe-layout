@@ -4,52 +4,79 @@ var rimraf = require('rimraf');
 var exec = require('child_process').exec;
 
 var plugin_name,
-  class_name,
-  github_username,
-  seed_plugin_name = "yourplugin",
-  seed_class_name = "YourPlugin",
-  seed_demo_property_name = "yourPlugin",
-  seed_github_username = "YourName",
-  demo_folder = "../demo",
-  init_git,
-  readme_template_file = "README.md",
-  readme_file = "../README.md";
-  screenshots_dir = "../screenshots";
+    class_name,
+    github_username,
+    seed_plugin_name = "yourplugin",
+    seed_class_name = "YourPlugin",
+    seed_demo_property_name = "yourPlugin",
+    seed_github_username = "YourName",
+    demo_folder = "../demo",
+    init_git,
+    readme_template_file = "README.md",
+    readme_file = "../README.md";
+screenshots_dir = "../screenshots";
 
 console.log('NativeScript Plugin Seed Configuration');
-prompt.start();
+
+var parseArgv = function() {
+    var argv = Array.prototype.slice.call(process.argv, 2);
+    var result = {};
+    argv.forEach(function(pairString) {
+        var pair = pairString.split('=');
+        result[pair[0]] = pair[1];
+    });
+    return result;
+};
+var argv = parseArgv();
+console.log(argv);
+
+if (argv.gitHubUsername !== undefined && argv.pluginName !== undefined && argv.initGit !== undefined) {
+    github_username = argv.gitHubUsername;
+    plugin_name = argv.pluginName;
+    init_git = argv.initGit
+}
+
 askGithubUsername();
 
 function askGithubUsername() {
-    prompt.get({
-        name: 'github_username',
-        description: 'What is your GitHub username (used for updating package.json)? Example: NathanWalker / EddyVerbruggen'
-    }, function (err, result) {
-        if (err) {
-            return console.log(err);
-        }
-        if (!result.github_username) {
-            return console.log("Your GitHub username is required to configure plugin's package.json.");
-        }
-        github_username = result.github_username;
+    if (github_username !== undefined) {
         askPluginName();
-    });
+    } else {
+        prompt.start();
+        prompt.get({
+            name: 'github_username',
+            description: 'What is your GitHub username (used for updating package.json)? Example: NathanWalker / EddyVerbruggen'
+        }, function(err, result) {
+            if (err) {
+                return console.log(err);
+            }
+            if (!result.github_username) {
+                return console.log("Your GitHub username is required to configure plugin's package.json.");
+            }
+            github_username = result.github_username;
+            askPluginName();
+        });
+    }
 }
 
 function askPluginName() {
-    prompt.get({
-        name: 'plugin_name',
-        description: 'What will be the name of your plugin? Use lowercase characters and dashes only. Example: yourplugin / google-maps / bluetooth'
-    }, function (err, result) {
-        if (err) {
-            return console.log(err);
-        }
-        if (!result.plugin_name) {
-            return console.log("Your plugin name is required to correct the file names and classes.");
-        }
-        plugin_name = result.plugin_name;
+    if (plugin_name !== undefined) {
         generateClassName();
-    });
+    } else {
+        prompt.get({
+            name: 'plugin_name',
+            description: 'What will be the name of your plugin? Use lowercase characters and dashes only. Example: yourplugin / google-maps / bluetooth'
+        }, function(err, result) {
+            if (err) {
+                return console.log(err);
+            }
+            if (!result.plugin_name) {
+                return console.log("Your plugin name is required to correct the file names and classes.");
+            }
+            plugin_name = result.plugin_name;
+            generateClassName();
+        });
+    }
 }
 
 function generateClassName() {
@@ -68,11 +95,11 @@ function renameFiles() {
     console.log('Will now rename some files..');
     var files = fs.readdirSync(".");
     for (var f in files) {
-      var file = files[f];
-      if (file.indexOf(seed_plugin_name) === 0) {
-          var newName = plugin_name + file.substr(file.indexOf("."));
-          fs.renameSync(file, newName);
-      }
+        var file = files[f];
+        if (file.indexOf(seed_plugin_name) === 0) {
+            var newName = plugin_name + file.substr(file.indexOf("."));
+            fs.renameSync(file, newName);
+        }
     }
 
     adjustScripts();
@@ -93,8 +120,8 @@ function adjustScripts() {
     // add the demo files
     var demoFiles = fs.readdirSync(demo_folder + "/app/");
     for (var d in demoFiles) {
-      var demoFile = demoFiles[d];
-      files.push(demo_folder + "/app/" + demoFile);
+        var demoFile = demoFiles[d];
+        files.push(demo_folder + "/app/" + demoFile);
     }
     // add the tests
     files.push(demo_folder + "/app/tests/tests.js");
@@ -106,16 +133,16 @@ function adjustScripts() {
     var regexp_seed_github_username = new RegExp(seed_github_username, "g");
 
     for (var f in files) {
-      var file = files[f];
+        var file = files[f];
 
-      if (fs.lstatSync(file).isFile()) {
-        var contents = fs.readFileSync(file, 'utf8');
-        var result = contents.replace(regexp_seed_plugin_name, plugin_name);
-        result = result.replace(regexp_seed_class_name, class_name);
-        result = result.replace(regexp_seed_demo_property_name, class_name[0].toLowerCase() + class_name.substr(1));
-        result = result.replace(regexp_seed_github_username, github_username);
-        fs.writeFileSync(file, result);
-      }
+        if (fs.lstatSync(file).isFile()) {
+            var contents = fs.readFileSync(file, 'utf8');
+            var result = contents.replace(regexp_seed_plugin_name, plugin_name);
+            result = result.replace(regexp_seed_class_name, class_name);
+            result = result.replace(regexp_seed_demo_property_name, class_name[0].toLowerCase() + class_name.substr(1));
+            result = result.replace(regexp_seed_github_username, github_username);
+            fs.writeFileSync(file, result);
+        }
     }
 
     initReadMe();
@@ -126,45 +153,54 @@ function initReadMe() {
     fs.writeFileSync(readme_file, contents);
     fs.unlinkSync(readme_template_file);
 
-    rimraf(screenshots_dir, function () { 
+    rimraf(screenshots_dir, function() {
         console.log('Screenshots removed.');
-        initGit();
-    });    
- }
-
-function initGit() {
-    prompt.get({
-        name: 'init_git',
-        description: 'Do you want to init a fresh local git project? If you previously \'git clone\'d this repo that would be wise (y/n)',
-        default: 'y'
-    }, function (err, result) {
-        if (err) {
-            return console.log(err);
-        }
-        if (result.init_git && result.init_git.toLowerCase() === 'y') {
-            rimraf.sync('../.git');
-            exec('git init -q ..', function(err, stdout, stderr) {
-                if (err) {
-                    console.log(err);
-                    finishSetup();
-                } else {
-                    exec("git add '../*' '../.*'", function(err, stdout, stderr) {
-                        if (err) {
-                            console.log(err);
-                        }
-                        finishSetup();
-                    });
-                }
-            });
-        } else {
-          finishSetup();
-        }
+        askInitGit();
     });
 }
 
-function finishSetup() {
-  console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
-  console.log("You can now continue with development or usage setup!");
+function askInitGit() {
+    if (init_git !== undefined) {
+        initGit();
+    } else {
+        prompt.get({
+            name: 'init_git',
+            description: 'Do you want to init a fresh local git project? If you previously \'git clone\'d this repo that would be wise (y/n)',
+            default: 'y'
+        }, function(err, result) {
+            if (err) {
+                return console.log(err);
+            }
 
-  process.exit();
+            initGit();
+        });
+    }
+}
+
+function initGit() {
+    if (init_git && init_git.toLowerCase() === 'y') {
+        rimraf.sync('../.git');
+        exec('git init -q ..', function(err, stdout, stderr) {
+            if (err) {
+                console.log(err);
+                finishSetup();
+            } else {
+                exec("git add '../*' '../.*'", function(err, stdout, stderr) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    finishSetup();
+                });
+            }
+        });
+    } else {
+        finishSetup();
+    }
+}
+
+function finishSetup() {
+    console.log("Configuration finished! If you're not happy with the result please clone the seed again and rerun this script.");
+    console.log("You can now continue with development or usage setup!");
+
+    process.exit();
 }
