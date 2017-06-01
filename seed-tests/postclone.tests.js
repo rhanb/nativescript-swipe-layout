@@ -7,7 +7,9 @@ var async = require("async");
 
 const SEED_LOCATION = "../";
 const SEED_COPY_LOCATION = "seed-copy";
-const TEST_PLUGIN_NAME = "SampleSeedPlugin";
+const SEED_COPY_NEW_GIT_REPO_LOCATION = "seed-copy-new-git-repo";
+const TEST_PLUGIN_NAME = "ThePlugin";
+const TEST_GITHUB_USERNAME = "TheGitHubUser";
 var _srcReadmeContent = "";
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000; // 30 secs
@@ -15,35 +17,27 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000; // 30 secs
 
 describe('postclone', function() {
 
-    // TODO: extract helper functions for readability
     beforeAll(function(done) {
-        rimraf.sync(SEED_COPY_LOCATION);
-        console.log('Seed copy folder successfully deleted.');
-
-        // clone the seed files
-        ncp(SEED_LOCATION, SEED_COPY_LOCATION, {
-            filter: function(fileName) {
-                if (fileName.indexOf("seed-tests/seed-copy") > -1 ||
-                    fileName.indexOf("demo/node_modules") > -1 ||
-                    fileName.indexOf("src/node_modules") > -1 ||
-                    fileName.indexOf("demo/platforms") > -1) {
-                    return false;
-                }
-
-                return true;
-            }
-        }, function(err) {
+        copySeedDir(SEED_LOCATION, SEED_COPY_LOCATION, function(err) {
             if (err) {
                 done.fail(err);
             }
 
-
             _srcReadmeContent = fs.readFileSync(SEED_LOCATION + "/src/README.md");
-            console.log('Seed copy folder successfully created.');
-            exec("cd " + SEED_COPY_LOCATION + "/src && npm run postclone -- gitHubUsername=Toti pluginName=" + TEST_PLUGIN_NAME + " initGit=no", function(error, stdout, stderr) {
-                expect(error).toBeNull();
-                done();
+            callPostclone(SEED_COPY_LOCATION, TEST_GITHUB_USERNAME, TEST_PLUGIN_NAME, "n", function(error) {
+                if (err) {
+                    done.fail(err);
+                } else {
+                    done();
+                }
             });
+        });
+    });
+
+    it('should not init new git repo', function(done) {
+        exec("cd " + SEED_COPY_LOCATION + " && git config --get remote.origin.url", function(error, stdout, stderr) {
+            expect(stdout).toEqual("git@github.com:NativeScript/nativescript-plugin-seed.git\n");
+            done();
         });
     });
 
@@ -80,6 +74,67 @@ describe('postclone', function() {
         });
     });
 
+    it('should replace each YourPlugin string', function(done) {
+        findInFiles("YourPlugin", SEED_COPY_LOCATION, function(resultsCount) {
+            expect(resultsCount).toEqual(0);
+            done();
+        });
+    });
+
+    it('should replace each yourPlugin string', function(done) {
+        findInFiles("yourPlugin", SEED_COPY_LOCATION, function(resultsCount) {
+            expect(resultsCount).toEqual(0);
+            done();
+        });
+    });
+
+    it('should replace each YourName string', function(done) {
+        findInFiles("YourName", SEED_COPY_LOCATION, function(resultsCount) {
+            expect(resultsCount).toEqual(0);
+            done();
+        });
+    });
+
+    it('should replace each YourName string with the test github username', function(done) {
+        findInFiles(TEST_GITHUB_USERNAME, SEED_COPY_LOCATION, function(resultsCount) {
+            // plugin author in the package json
+            expect(resultsCount).toEqual(1);
+            done();
+        });
+    });
+
+    it('should replace each YourName string with the test github username', function(done) {
+        findInFiles(TEST_PLUGIN_NAME, SEED_COPY_LOCATION, function(resultsCount) {
+            expect(resultsCount).toBeGreaterThan(0);
+            done();
+        });
+    });
+
+    it('should replace each YourName string with the test github username', function(done) {
+        findInFiles("nativescript-" + TEST_PLUGIN_NAME, SEED_COPY_LOCATION, function(resultsCount) {
+            expect(resultsCount).toBeGreaterThan(0);
+            done();
+        });
+    });
+
+    it('should init new git repo', function(done) {
+        copySeedDir(SEED_LOCATION, SEED_COPY_NEW_GIT_REPO_LOCATION, function(err) {
+            if (err) {
+                done.fail(err);
+            }
+
+            callPostclone(SEED_COPY_NEW_GIT_REPO_LOCATION, TEST_GITHUB_USERNAME, TEST_PLUGIN_NAME, "y", function(error) {
+                if (err) {
+                    done.fail(err);
+                } else {
+                    exec("cd " + SEED_COPY_NEW_GIT_REPO_LOCATION + " && git config --get remote.origin.url", function(error, stdout, stderr) {
+                        expect(stdout).toEqual("");
+                        done();
+                    });
+                }
+            });
+        });
+    });
 
     function findInFiles(string, dir, callback) {
         var _resultsCount = 0;
@@ -105,7 +160,6 @@ describe('postclone', function() {
                             fs.readFile(entry, 'utf-8', function(err, contents) {
                                 if (contents.indexOf(string) > -1) {
                                     _resultsCount++;
-                                    console.log(entry);
                                 }
 
                                 foreachCallback();
@@ -121,5 +175,35 @@ describe('postclone', function() {
         _findInFiles(string, dir, function() {
             callback(_resultsCount);
         });
-    }
+    };
+
+    function copySeedDir(seedLocation, copyLocation, callback) {
+        rimraf.sync(copyLocation);
+        console.log(copyLocation + ' folder successfully deleted.');
+
+        ncp(seedLocation, copyLocation, {
+            filter: function(fileName) {
+                if (fileName.indexOf("seed-tests/" + SEED_COPY_LOCATION) > -1 ||
+                    fileName.indexOf("seed-tests/" + SEED_COPY_NEW_GIT_REPO_LOCATION) > -1 ||
+                    fileName.indexOf("demo/node_modules") > -1 ||
+                    fileName.indexOf("src/node_modules") > -1 ||
+                    fileName.indexOf("demo/platforms") > -1) {
+                    return false;
+                }
+
+                return true;
+            }
+        }, function(err) {
+            if (!err) {
+                console.log(copyLocation + ' folder successfully created.');
+            }
+            callback(err);
+        });
+    };
+
+    function callPostclone(pluginLocation, githubUsername, pluginName, initGit, callback) {
+        exec("cd " + pluginLocation + "/src && npm run postclone -- gitHubUsername=" + githubUsername + " pluginName=" + pluginName + " initGit=" + initGit, function(error, stdout, stderr) {
+            callback(error, stdout, stderr);
+        });
+    };
 });
