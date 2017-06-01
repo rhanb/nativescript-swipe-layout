@@ -1,3 +1,0 @@
-<GridLayout>
-    <Label text="{{ message }}" textWrap="true"></Label>
-</GridLayout>
