@@ -5,6 +5,7 @@
 *.js.map
 *.log
 !src/scripts/*.js
+!seed-tests/*.js
 demo/app/*.js
 !demo/karma.conf.js
 !demo/app/tests/*.js
