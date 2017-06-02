@@ -16,7 +16,8 @@ var class_name,
     demo_folder = "../demo",
     readme_template_file = "README.md",
     readme_file = "../README.md",
-    screenshots_dir = "../screenshots";
+    screenshots_dir = "../screenshots",
+    seed_tests_dir = "../seed-tests";
 
 console.log('NativeScript Plugin Seed Configuration');
 
@@ -157,7 +158,10 @@ function initReadMe() {
 
     rimraf(screenshots_dir, function() {
         console.log('Screenshots removed.');
-        askInitGit();
+        rimraf(seed_tests_dir, function() {
+            console.log('Seed tests removed.');
+            askInitGit();
+        });
     });
 }
 
