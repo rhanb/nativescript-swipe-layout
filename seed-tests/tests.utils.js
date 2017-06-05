@@ -3,8 +3,11 @@ var rimraf = require('rimraf');
 var ncp = require('ncp').ncp;
 var fs = require('fs');
 var async = require("async");
+var os = require('os');
 
-const SEED_COPY_LOCATION = "seed-copy";
+exports.SEED_LOCATION = "../";
+exports.SEED_COPY_LOCATION = "seed-copy";
+exports.DEFAULT_PLUGIN_NAME = "nativescript-yourplugin";
 
 exports.findInFiles = function findInFiles(string, dir, callback) {
     var _resultsCount = 0;
@@ -53,7 +56,7 @@ exports.copySeedDir = function copySeedDir(seedLocation, copyLocation, callback)
 
     ncp(seedLocation, copyLocation, {
         filter: function(fileName) {
-            if (fileName.indexOf("seed-tests/" + SEED_COPY_LOCATION) > -1 ||
+            if (fileName.indexOf("seed-tests/" + exports.SEED_COPY_LOCATION) > -1 ||
                 fileName.indexOf("demo/node_modules") > -1 ||
                 fileName.indexOf("src/node_modules") > -1 ||
                 fileName.indexOf("demo/platforms") > -1) {
@@ -71,8 +74,33 @@ exports.copySeedDir = function copySeedDir(seedLocation, copyLocation, callback)
 };
 
 exports.callPostclone = function callPostclone(pluginLocation, githubUsername, pluginName, initGit, callback) {
-    console.log("cd " + pluginLocation + "/src && npm run postclone -- gitHubUsername=" + githubUsername + " pluginName=" + pluginName + " initGit=" + initGit);
     exec("cd " + pluginLocation + "/src && npm run postclone -- gitHubUsername=" + githubUsername + " pluginName=" + pluginName + " initGit=" + initGit, function(error, stdout, stderr) {
         callback(error, stdout, stderr);
     });
 };
+
+exports.callDevelopmentSetup = function callDevelopmentSetup(pluginLocation, callback) {
+    exec("cd " + pluginLocation + "/src && npm run development.setup", function(error, stdout, stderr) {
+        callback(error, stdout, stderr);
+    });
+};
+
+exports.getNpmLinks = function getNpmLinks(callback) {
+    exec("npm list -g --depth=0", function(error, stdout, stderr) {
+        var links = stdout.split(os.EOL)
+            .map(function(item) {
+                return item.replace("├──", "").replace("└──", "").trim();
+            })
+            .filter(function(item) {
+                return !!item && item.indexOf("->") !== -1;
+            });
+
+        callback(links);
+    });
+}
+
+exports.removeNpmLink = function removeNpmLink(packageName, callback) {
+    exec("npm remove " + packageName + " -g", function(error, stdout, stderr) {
+        callback();
+    });
+}

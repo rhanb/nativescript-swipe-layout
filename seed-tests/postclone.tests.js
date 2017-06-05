@@ -1,17 +1,18 @@
 var exec = require('child_process').exec;
 var fs = require('fs');
 var glob = require("glob");
-var findInFiles = require("./tests.utils").findInFiles;
-var copySeedDir = require("./tests.utils").copySeedDir;
-var callPostclone = require("./tests.utils").callPostclone;
+var testUtils = require("./tests.utils");
+var findInFiles = testUtils.findInFiles;
+var copySeedDir = testUtils.copySeedDir;
+var callPostclone = testUtils.callPostclone;
+var SEED_LOCATION = testUtils.SEED_LOCATION;
+var SEED_COPY_LOCATION = testUtils.SEED_COPY_LOCATION;
 
-const SEED_LOCATION = "../";
-const SEED_COPY_LOCATION = "seed-copy";
 const TEST_PLUGIN_NAME = "ThePlugin";
 const TEST_GITHUB_USERNAME = "TheGitHubUser";
 var _srcReadmeContent = "";
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000; // 30 secs
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000; // 60 secs
 
 
 describe('postclone', function() {
