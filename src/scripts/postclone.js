@@ -31,7 +31,6 @@ var parseArgv = function() {
     return result;
 };
 var argv = parseArgv();
-console.log(argv);
 
 if (argv.gitHubUsername !== undefined && argv.pluginName !== undefined && argv.initGit !== undefined) {
     inputParams.github_username = argv.gitHubUsername;

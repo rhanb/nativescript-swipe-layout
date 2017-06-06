@@ -4,10 +4,7 @@ var ncp = require('ncp').ncp;
 var fs = require('fs');
 var async = require("async");
 var os = require('os');
-
-exports.SEED_LOCATION = "../";
-exports.SEED_COPY_LOCATION = "seed-copy";
-exports.DEFAULT_PLUGIN_NAME = "nativescript-yourplugin";
+var constants = require('./tests.constants');
 
 exports.findInFiles = function findInFiles(string, dir, callback) {
     var _resultsCount = 0;
@@ -56,7 +53,7 @@ exports.copySeedDir = function copySeedDir(seedLocation, copyLocation, callback)
 
     ncp(seedLocation, copyLocation, {
         filter: function(fileName) {
-            if (fileName.indexOf("seed-tests/" + exports.SEED_COPY_LOCATION) > -1 ||
+            if (fileName.indexOf("seed-tests/" + constants.SEED_COPY_LOCATION) > -1 ||
                 fileName.indexOf("demo/node_modules") > -1 ||
                 fileName.indexOf("src/node_modules") > -1 ||
                 fileName.indexOf("demo/platforms") > -1) {
