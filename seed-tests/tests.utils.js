@@ -73,14 +73,14 @@ exports.copySeedDir = function copySeedDir(seedLocation, copyLocation, callback)
     });
 };
 
-exports.callPostclone = function callPostclone(pluginLocation, githubUsername, pluginName, initGit, callback) {
-    exec("cd " + pluginLocation + "/src && npm run postclone -- gitHubUsername=" + githubUsername + " pluginName=" + pluginName + " initGit=" + initGit, function(error, stdout, stderr) {
+exports.callPostclone = function callPostclone(seedLocation, githubUsername, pluginName, initGit, callback) {
+    exec("cd " + seedLocation + "/src && npm run postclone -- gitHubUsername=" + githubUsername + " pluginName=" + pluginName + " initGit=" + initGit, function(error, stdout, stderr) {
         callback(error, stdout, stderr);
     });
 };
 
-exports.callDevelopmentSetup = function callDevelopmentSetup(pluginLocation, callback) {
-    exec("cd " + pluginLocation + "/src && npm run development.setup", function(error, stdout, stderr) {
+exports.callDevelopmentSetup = function callDevelopmentSetup(seedLocation, callback) {
+    exec("cd " + seedLocation + "/src && npm run development.setup", function(error, stdout, stderr) {
         callback(error, stdout, stderr);
     });
 };

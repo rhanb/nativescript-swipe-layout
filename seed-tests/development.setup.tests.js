@@ -40,4 +40,8 @@ describe('development.setup', function() {
             });
         });
     });
+
+    // TODO: check demo package.json for plugin dependency with "../src"
+    // TODO: check if the plugin is linked in the node_modules
+    // TODO: call second time after npm i
 });

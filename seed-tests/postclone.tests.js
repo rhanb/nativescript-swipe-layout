@@ -17,6 +17,8 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000; // 60 secs
 
 describe('postclone', function() {
 
+    // keep before 'should not init new git repo' 
+    // in order to avoid getting new files in the git repo
     it('should init new git repo', function(done) {
         copySeedDir(SEED_LOCATION, SEED_COPY_LOCATION, function(err) {
             if (err) {
@@ -24,8 +26,8 @@ describe('postclone', function() {
             }
 
             callPostclone(SEED_COPY_LOCATION, TEST_GITHUB_USERNAME, TEST_PLUGIN_NAME, "y", function(error) {
-                if (err) {
-                    done.fail(err);
+                if (error) {
+                    done.fail(error);
                 } else {
                     exec("cd " + SEED_COPY_LOCATION + "/src && git config --get remote.origin.url", function(error, stdout, stderr) {
                         expect(stdout).toEqual("");
@@ -122,14 +124,14 @@ describe('postclone', function() {
         });
     });
 
-    it('should replace each YourName string with the test github username', function(done) {
+    it('should replace each YourPlugin string with ThePlugin', function(done) {
         findInFiles(TEST_PLUGIN_NAME, SEED_COPY_LOCATION, function(resultsCount) {
             expect(resultsCount).toBeGreaterThan(0);
             done();
         });
     });
 
-    it('should replace each YourName string with the test github username', function(done) {
+    it('should replace each nativescript-YourPlugin string with nativescript-ThePlugin', function(done) {
         findInFiles("nativescript-" + TEST_PLUGIN_NAME, SEED_COPY_LOCATION, function(resultsCount) {
             expect(resultsCount).toBeGreaterThan(0);
             done();
