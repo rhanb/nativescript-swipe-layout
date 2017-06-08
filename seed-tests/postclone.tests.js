@@ -36,11 +36,11 @@ describe('postclone', function() {
             }
 
             _srcReadmeContent = fs.readFileSync(constants.SEED_LOCATION + "/src/README.md");
-            testUtils.callPostclone(constants.SEED_COPY_LOCATION, constants.TEST_GITHUB_USERNAME, constants.TEST_PLUGIN_NAME, "n", function(error) {
-                if (err) {
-                    done.fail(err);
+            testUtils.callPostclone(constants.SEED_COPY_LOCATION, constants.TEST_GITHUB_USERNAME, constants.TEST_PLUGIN_NAME, "n", function(error, stdout) {
+                if (error) {
+                    done.fail(error);
                 } else {
-                    exec("cd " + constants.SEED_COPY_LOCATION + " && git config --get remote.origin.url", function(error, stdout, stderr) {
+                    exec("cd " + constants.SEED_COPY_LOCATION + " && git config --get remote.origin.url", function(execError, stdout, stderr) {
                         expect(stdout).toContain("NativeScript/nativescript-plugin-seed.git");
                         done();
                     });
