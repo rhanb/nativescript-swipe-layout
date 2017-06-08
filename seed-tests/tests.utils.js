@@ -105,17 +105,21 @@ exports.removeNpmLink = function removeNpmLink(packageName, callback) {
     });
 }
 
+exports.isAndroid = function isAndroid() {
+    return !!!process.env.IOS;
+}
+
 function getPackageJsonPostcloneScript() {
     var packageJsonFile = constants.SEED_COPY_LOCATION + "/src/package.json";
-      
-      if (fs.lstatSync(packageJsonFile).isFile()) {
+
+    if (fs.lstatSync(packageJsonFile).isFile()) {
         var packageJson = JSON.parse(fs.readFileSync(packageJsonFile, 'utf8'));
         var packageJsonScripts = packageJson["scripts"];
 
-        if(packageJsonScripts && packageJsonScripts["postclone"]) {
+        if (packageJsonScripts && packageJsonScripts["postclone"]) {
             return packageJsonScripts["postclone"];
         };
-      }
+    }
 
-      return "";
+    return "";
 }
