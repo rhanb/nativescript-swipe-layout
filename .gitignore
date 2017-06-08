@@ -1,7 +1,13 @@
+.vscode
+.idea
+.DS_Store
 *.js
 *.js.map
 *.log
-!scripts/*.js
+!src/scripts/*.js
+!seed-tests/*.js
+seed-tests/seed-copy/**/*.*
+seed-tests/seed-copy-new-git-repo/**/*.*
 demo/app/*.js
 !demo/karma.conf.js
 !demo/app/tests/*.js
@@ -11,3 +17,5 @@ demo/lib
 demo/platforms
 demo/node_modules
 node_modules
+publish/src
+publish/package

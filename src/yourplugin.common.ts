@@ -9,6 +9,10 @@ export class Common extends Observable {
     super();
     this.message = Utils.SUCCESS_MSG();
   }
+
+  public greet() {
+    return "Hello, NS";
+  }
 }
 
 export class Utils {
@@ -22,4 +26,3 @@ export class Utils {
     return msg;
   }
 }
-
