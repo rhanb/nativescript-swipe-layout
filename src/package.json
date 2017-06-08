@@ -38,7 +38,7 @@
     "bugs": {
         "url": "https://github.com/YourName/nativescript-yourplugin/issues"
     },
-    "license": "MIT",
+    "license": "Apache-2.0",
     "homepage": "https://github.com/YourName/nativescript-yourplugin",
     "readmeFilename": "README.md",
     "peerDependencies": {
