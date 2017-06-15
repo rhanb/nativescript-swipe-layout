@@ -9,7 +9,6 @@ matrix:
         - android-wait-for-emulator
       before_install:
         - nvm install 6
-        - nvm install stable
       script: npm run test.android
     - os: osx
       language: node_js
@@ -32,5 +31,3 @@ install:
     - tns usage-reporting disable
     - tns error-reporting disable
     - cd src
-    - cd seed-tests
-    - npm i

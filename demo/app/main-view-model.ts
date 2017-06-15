@@ -7,7 +7,6 @@ export class HelloWorldModel extends Observable {
 
   constructor() {
     super();
-
     this.swipeCard = new SwipeCard();
     this.message = this.swipeCard.message;
   }
