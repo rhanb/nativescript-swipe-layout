@@ -1,13 +1,13 @@
-import { Observable } from 'tns-core-modules/data/observable';
-import { SwipeCard } from 'nativescript-swipe-card';
+import { Observable, EventData } from "tns-core-modules/data/observable/observable";
 
 export class HelloWorldModel extends Observable {
   public message: string;
-  private swipeCard: SwipeCard;
 
   constructor() {
     super();
-    this.swipeCard = new SwipeCard();
-    this.message = this.swipeCard.message;
+  }
+
+  public cardLoaded (args: EventData) {
+    console.dir("cardLoaded");
   }
 }

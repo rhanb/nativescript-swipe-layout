@@ -19,3 +19,5 @@ demo/node_modules
 node_modules
 publish/src
 publish/package
+demo/app/src
+demo/.nslivesyncinfo

@@ -1,7 +1,9 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page"
-  xmlns:ui="nativescript-swipe-card">
+  xmlns:Card="nativescript-swipe-card">
   <StackLayout class="p-20">
-    <Label text="{{ message }}" class="t-20 text-center c-black" textWrap="true"/>
-    <ui:SwipeCardUI message="{{ 'This message is shown by a custom UI component:\n' + message }}" height="100" width="300" backgroundColor="gray" />
+    <Label class="t-20 text-center c-black" text="test" textWrap="true"/>
+    <Card:SwipeCard width="300" height="200" loaded="cardLoaded" tap="tap" backgroundColor="green">
+      <Label class="t-20 text-center c-black" text="test" textWrap="true"/>
+    </Card:SwipeCard>
   </StackLayout>
 </Page>

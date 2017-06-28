@@ -1,6 +1,11 @@
 import { Common } from './swipe-card.common';
 export declare class SwipeCard extends Common {
-  // define your typings manually
-  // or..
-  // take the ios or android .d.ts files and copy/paste them here
+    readonly android: any;
+    createNativeView(): any;
+    initNativeView(): void;
+    readonly ios: any;
+    onLoaded(): void;
+    onUnloaded(): void;
+    disposeNativeView(): void;
+    
 }
