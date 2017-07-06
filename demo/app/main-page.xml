@@ -1,9 +1,4 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page"
   xmlns:Card="nativescript-swipe-card">
-  <StackLayout class="p-20">
-    <Label class="t-20 text-center c-black" text="test" textWrap="true"/>
-    <Card:SwipeCard width="300" height="200" loaded="cardLoaded" tap="tap" backgroundColor="green">
-      <Label class="t-20 text-center c-black" text="test" textWrap="true"/>
-    </Card:SwipeCard>
-  </StackLayout>
+    <Card:SwipeCard height="300" width="300" backgroundColor="green" loaded="cardLoaded" swipeLeft="swipeLeft" />
 </Page>

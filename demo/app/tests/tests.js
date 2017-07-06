@@ -1,12 +1,12 @@
-var SwipeCard = require("nativescript-swipe-card").SwipeCard;
-var swipeCard = new SwipeCard();
+var YourPlugin = require("nativescript-yourplugin").YourPlugin;
+var yourPlugin = new YourPlugin();
 
 describe("greet function", function() {
     it("exists", function() {
-        expect(swipeCard.greet).toBeDefined();
+        expect(yourPlugin.greet).toBeDefined();
     });
 
     it("returns a string", function() {
-        expect(swipeCard.greet()).toEqual("Hello, NS");
+        expect(yourPlugin.greet()).toEqual("Hello, NS");
     });
 });

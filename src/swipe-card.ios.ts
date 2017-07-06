@@ -1,53 +1,20 @@
-import { Common } from './swipe-card.common';
-import { GesturesObserver, GestureTypes, SwipeGestureEventData, GestureEventData, TouchGestureEventData, PanGestureEventData, SwipeDirection } from "tns-core-modules/ui/gestures/gestures";
+import { SwipeCardBase, SwipeDownEvent, SwipeUpEvent, SwipeLeftEvent, SwipeRightEvent } from './swipe-card.common';
+import { GestureTypes, SwipeGestureEventData, SwipeDirection } from "tns-core-modules/ui/gestures/gestures";
 import { screen } from "tns-core-modules/platform";
 
-declare var CGRectMake;
+declare var CGRectMake, UIView;
 
 
-export class SwipeCard extends Common {
+export class SwipeCard extends SwipeCardBase {
 
     constructor() {
         super();
         this.nativeView = new UIView(CGRectMake(0, 0, 0, 0));
-        let that = new WeakRef(this);
-        this.on(GestureTypes.swipe, (args: SwipeGestureEventData) => {
-            let originalPos = that.get().getLocationOnScreen();
-            let width = that.get().getMeasuredWidth(), height = that.get().getMeasuredHeight();
-            let xSwipe = originalPos.x, ySwipe = originalPos.y;
-            switch (args.direction) {
-                case SwipeDirection.down:
-                    ySwipe = screen.mainScreen.heightDIPs + height;
-                    break;
-                case SwipeDirection.up:
-                    ySwipe = - height;
-                    break;
-                case SwipeDirection.left:
-                    xSwipe = - width;
-                    break;
-                case SwipeDirection.right:
-                    xSwipe = screen.mainScreen.widthDIPs + width;
-                    break;
-            }
-            that.get().animate({
-                translate: {
-                    x: xSwipe,
-                    y: ySwipe
-                }
-            }).then(() => {
-                that.get().animate({
-                    translate: {
-                        x: originalPos.x,
-                        y: originalPos.y
-                    }
-                });
-            });
-        });
     }
 
 
     get ios(): any {
-        return this.nativeView
+        return this.nativeView;
     }
 
     public onLoaded() {

@@ -1,5 +1,5 @@
-import { Common } from './swipe-card.common';
-export declare class SwipeCard extends Common {
+import { SwipeCardBase } from './swipe-card.common';
+export declare class SwipeCard extends SwipeCardBase {
     constructor();
     readonly ios: any;
     onLoaded(): void;
