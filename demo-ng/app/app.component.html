@@ -1,16 +1,20 @@
 <!-- https://docs.nativescript.org/angular/core-concepts/angular-navigation.html#page-router-outlet -->
 <ActionBar title="swipe-card" icon="" class="action-bar">
 </ActionBar>
-<GridLayout rows="*" columns="*" backgroundColor="green">
-    <SwipeCard height="500" (loaded)="tabLoaded($event)" (swipeLeft)="swipeLeft($event)" (swipeRight)="swipeRight($event)" (swipeDown)="swipeDown($event)"
-        (swipeUp)="swipeUp($event)">
-        <CardView class="cardStyle" margin="10" elevation="40" radius="5">
-            <GridLayout rows="200, auto, auto" columns="auto, auto, *">
+<GridLayout rows="*, auto" columns="*" backgroundColor="#77849F">
+    <SwipeCard height="300" width="300" row="0" colSpan="3" col="0" (loaded)="tabLoaded($event)" (swipeLeft)="swipeLeft($event)"
+        (swipeRight)="swipeRight($event)" (swipeDown)="swipeDown($event)" (swipeUp)="swipeUp($event)">
+        <CardView backgroundColor="white" margin="10" elevation="40" radius="5">
+            <GridLayout rows="200, auto" columns="*">
                 <image src="https://img.youtube.com/vi/GGhKPm18E48/mqdefault.jpg" stretch="aspectFill" colSpan="3" row="0"></image>
                 <label text="Batman wants to be friends?" class="info" textWrap="true" row="1" colSpan="3" class="p-20"></label>
-                <Button text="ACCEPT" (tap)="comeHere()" row="2" col="0"></Button>
-                <Button text="DECLINE" (tap)="goAway()" row="2" col="1"></Button>
             </GridLayout>
         </CardView>
     </SwipeCard>
+    <GridLayout row="1" rows="*" columns="auto, auto, auto">
+        <Button (tap)="comeHere()" row="0" col="0" class="p-20" class="btn btn-primary p-20" text="LIKE">
+                </Button>
+        <Button text="SUPER" (tap)="super()" row="0" col="1" class="btn p-20" backgroundColor="#5BD6BB" color="white"></Button>
+        <Button text="DECLINE" (tap)="goAway()" row="0" col="2" class="btn p-20" backgroundColor="#B33A3A" color="white"></Button>
+    </GridLayout>
 </GridLayout>

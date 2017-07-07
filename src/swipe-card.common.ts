@@ -28,6 +28,8 @@ export class SwipeEventData implements EventData {
             this.destinationY = this.originY;
         }
         if (destinationXValue) {
+            this.destinationX = destinationXValue;
+        } else {
             this.destinationX = this.originX;
         }
 
@@ -63,6 +65,7 @@ export class SwipeCardBase extends ContentView {
     public panning: boolean = false;
     public initOriginX: number;
     public initOriginY: number;
+    private static animationDuration: number = 500;
 
     constructor() {
         super();
@@ -71,78 +74,62 @@ export class SwipeCardBase extends ContentView {
         this.initOriginY = this.originY;
 
         this.on(GestureTypes.swipe, (args: SwipeGestureEventData) => {
-            if (!that.panning) {
-                if (!that.swiping) {
-                    that.swiping = true;
-                }
-                //let eventCoordinates = that.getEventCoordinates(args.direction);
-                let eventData = that.getEventData(args.direction);
+            let eventData = that.getEventData(args.direction);
+            that._cancelAllAnimations();
+            if (!that.swiping) {
+                that.swiping = true;
+            }
+            that.animate({
+                translate: {
+                    x: eventData.destinationX,
+                    y: eventData.destinationY
+                },
+                duration: SwipeCardBase.animationDuration,
+                curve: AnimationCurve.cubicBezier(0.1, 0.1, 0.1, 1)
+            }).then(() => {
                 that.animate({
                     translate: {
-                        x: eventData.destinationX,
-                        y: eventData.destinationY
+                        x: that.initOriginX,
+                        y: that.initOriginY
                     },
-                    duration: 1000,
+                    duration: SwipeCardBase.animationDuration,
                     curve: AnimationCurve.cubicBezier(0.1, 0.1, 0.1, 1)
                 }).then(() => {
-                    that.animate({
-                        translate: {
-                            x: that.initOriginX,
-                            y: that.initOriginY
-                        },
-                        duration: 1000,
-                        curve: AnimationCurve.cubicBezier(0.1, 0.1, 0.1, 1)
-                    }).then(() => {
-                        that.notify(eventData);
-                        that.swiping = false;
-                    });
+                    that.notify(eventData);
+                    that.swiping = false;
                 });
-            }
+            });
         });
         this.on(GestureTypes.pan, (args: PanGestureEventData) => {
-            if (!that.swiping) {
-                if (!that.panning) {
-                    that.panning = true;
-                }
-                if (args.state === 2) {
-                    that.translateX += args.deltaX - that.prevDeltaX;
-                    that.translateY += args.deltaY - that.prevDeltaY;
-                    if (that.translateX < 0) {
-                        let eventData = that.getEventData(SwipeDirection.left);
-                        that.animate({
-                            translate: {
-                                x: eventData.destinationX,
-                                y: eventData.destinationY
-                            },
-                            duration: 1000,
-                            curve: AnimationCurve.cubicBezier(0.1, 0.1, 0.1, 1)
-                        }).then(() => {
+            if (!that.panning) {
+                that.panning = true;
+            }
+            if (args.state === 2) { // currently paning
+                that.translateX += args.deltaX - that.prevDeltaX;
+                that.translateY += args.deltaY - that.prevDeltaY;
 
-                        });
-                    }
+                that.prevDeltaX = args.deltaX;
+                that.prevDeltaY = args.deltaY;
 
-                    that.prevDeltaX = args.deltaX;
-                    that.prevDeltaY = args.deltaY;
-
+            } else { 
+                if (args.state === 1) {
+                    that.prevDeltaX = 0;
+                    that.prevDeltaY = 0;
                 } else {
-                    if (args.state === 1) {
-                        that.prevDeltaX = 0;
-                        that.prevDeltaY = 0;
-                        that.panning = false;
-                    } else {
-
-                        if (args.state === 3) {
+                    if (args.state === 3) { // Stop paning
+                        if (!that.swiping) {
+                            that._cancelAllAnimations();
                             that.animate({
                                 translate: { x: that.initOriginX, y: that.initOriginY },
-                                duration: 1000,
+                                duration: 100,
                                 curve: AnimationCurve.cubicBezier(0.1, 0.1, 0.1, 1)
                             }).then(() => {
                                 that.panning = false;
                             });
                         }
-
                     }
                 }
+
             }
         });
     }
@@ -151,16 +138,16 @@ export class SwipeCardBase extends ContentView {
         let eventData: SwipeEventData;
         switch (direction) {
             case SwipeDirection.down:
-                eventData = new SwipeDownEventData(this.originX, this.originY, undefined, screen.mainScreen.heightDIPs + height);
+                eventData = new SwipeDownEventData(this.originX, this.originY, this.initOriginX, screen.mainScreen.heightDIPs + height);
                 break;
             case SwipeDirection.up:
-                eventData = new SwipeUpEventData(this.originX, this.originY, undefined, - height);
+                eventData = new SwipeUpEventData(this.originX, this.originY, this.initOriginX, - height);
                 break;
             case SwipeDirection.left:
-                eventData = new SwipeLeftEventData(this.originX, this.originY, -width);
+                eventData = new SwipeLeftEventData(this.originX, this.originY, -width, this.initOriginY);
                 break;
             case SwipeDirection.right:
-                eventData = new SwipeRightEventData(this.originX, this.originY, screen.mainScreen.widthDIPs + width);
+                eventData = new SwipeRightEventData(this.originX, this.originY, screen.mainScreen.widthDIPs + width, this.initOriginY);
                 break;
         }
         return eventData;
@@ -185,20 +172,20 @@ export class SwipeCardBase extends ContentView {
 
     private swipe(x, y): Promise<void> {
         let that = this;
-        this.animate({
+        return this.animate({
             translate: {
                 x: x,
                 y: y
             },
-            duration: 1000,
+            duration: SwipeCardBase.animationDuration,
             curve: AnimationCurve.cubicBezier(0.1, 0.1, 0.1, 1)
         }).then(function () {
-            return that.animate({
+            that.animate({
                 translate: {
                     x: that.initOriginX,
                     y: that.initOriginY
                 },
-                duration: 1000,
+                duration: SwipeCardBase.animationDuration,
                 curve: AnimationCurve.cubicBezier(0.1, 0.1, 0.1, 1)
             })
         })

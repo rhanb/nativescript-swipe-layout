@@ -3,6 +3,7 @@ import { registerElement } from 'nativescript-angular';
 import { SwipeCard } from './src';
 import { SwipeLeftEventData, SwipeDownEventData, SwipeUpEventData, SwipeRightEventData } from "./src/swipe-card.common";
 import { CardView } from 'nativescript-cardview';
+import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 
 registerElement("CardView", () => CardView);
 registerElement('SwipeCard', () => SwipeCard);
@@ -15,7 +16,7 @@ registerElement('SwipeCard', () => SwipeCard);
 export class AppComponent {
     private _card: SwipeCard;
 
-    constructor() { }
+    constructor(private fonticon: TNSFontIconService) { }
 
     tabLoaded(event) {
         console.log('cardLoaded');
@@ -38,7 +39,7 @@ export class AppComponent {
 
     goAway() {
         console.log('goAway');
-        this._card.swipeLeft().then(() => {
+        this._card.swipeRight().then(() => {
             console.log('swipeLeft done');
         });
     }
@@ -46,8 +47,14 @@ export class AppComponent {
 
     comeHere() {
         console.log('comehere');
-        this._card.swipeRight().then(() => {
+        this._card.swipeLeft().then(() => {
             console.log('swipeRight done');
+        });
+    }
+
+    super () {
+        this._card.swipeUp().then(() => {
+            console.log("swipeUp done");
         });
     }
 }

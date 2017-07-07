@@ -11,7 +11,6 @@ refer to http://docs.nativescript.org/ui/theme.
 */
 @import 'nativescript-theme-core/css/core.light.css';
 
-.cardStyle {
-    background-color: #3489db;
-    color: #fff;
+.fa {
+    font-family: FontAwesome, fontawesome-webfont;
 }
