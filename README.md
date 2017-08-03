@@ -1,9 +1,9 @@
-# Nativescript-swipe-card
+# Nativescript-swipe-layout
 
-[![npm](https://img.shields.io/npm/v/nativescript-swipe-card.svg)](https://www.npmjs.com/package/nativescript-swipe-card)
-[![npm](https://img.shields.io/npm/dt/nativescript-swipe-card.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-swipe-card)
+[![npm](https://img.shields.io/npm/v/nativescript-swipe-layout.svg)](https://www.npmjs.com/package/nativescript-swipe-layout)
+[![npm](https://img.shields.io/npm/dt/nativescript-swipe-layout.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-swipe-layout)
 
-[![NPM](https://nodei.co/npm/nativescript-swipe-card.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/nativescript-swipe-card/)
+[![NPM](https://nodei.co/npm/nativescript-swipe-layout.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/nativescript-swipe-layout/)
 
 Simple swipeable layout, which allow you to drag it, detect swipe events, and perform swipe animations. 
 
@@ -12,7 +12,7 @@ Developed with :heart: by the team NativeBaguette 🥖
 ## Installation
 
 ```javascript
-tns plugin add nativescript-swipe-card
+tns plugin add nativescript-swipe-layout
 ```
 
 ## Usage 
@@ -23,7 +23,7 @@ tns plugin add nativescript-swipe-card
    
 ```xml
 <GridLayout rows="*, auto" columns="*" backgroundColor="#77849F">
-    <SwipeCard height="300" width="300" row="0" colSpan="3" col="0" (loaded)="swipeCardLoaded($event)"          		(swipeLeft)="swipeLeft($event)"
+    <SwipeLayout height="300" width="300" row="0" colSpan="3" col="0" (loaded)="swipeLayoutLoaded($event)"          		(swipeLeft)="swipeLeft($event)"
 (swipeRight)="swipeRight($event)" 
 (swipeDown)="swipeDown($event)" 
 (swipeUp)="swipeUp($event)">
@@ -33,7 +33,7 @@ tns plugin add nativescript-swipe-card
                 <label text="Batman wants to be friends?" class="info" textWrap="true" row="1" colSpan="3" class="p-20">		</label>
             </GridLayout>
         </CardView>
-    </SwipeCard>
+    </SwipeLayout>
     <GridLayout row="1" rows="*" columns="auto, auto, auto">
         <Button (tap)="comeHere()" row="0" col="0" class="p-20" class="btn btn-primary p-20" text="LIKE"></Button>
         <Button text="SUPER" (tap)="super()" row="0" col="1" class="btn p-20" backgroundColor="#5BD6BB" color="white"</Button>
@@ -46,12 +46,12 @@ tns plugin add nativescript-swipe-card
 ```typescript
 import { Component, ElementRef, ViewChild } from "@angular/core";
 import { registerElement } from 'nativescript-angular';
-import { SwipeCard,  SwipeLeftEventData, SwipeDownEventData, SwipeUpEventData, SwipeRightEventData } from 'nativescript-swipe-card';
+import { SwipeLayout,  SwipeLeftEventData, SwipeDownEventData, SwipeUpEventData, SwipeRightEventData } from 'nativescript-swipe-layout';
 import { CardView } from 'nativescript-cardview';
 import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 
 registerElement("CardView", () => CardView);
-registerElement('SwipeCard', () => SwipeCard);
+registerElement('SwipeLayout', () => SwipeLayout);
 
 @Component({
     selector: "ns-app",
@@ -59,13 +59,13 @@ registerElement('SwipeCard', () => SwipeCard);
 })
 
 export class AppComponent {
-    private _card: SwipeCard;
+    private _cardLayout: SwipeLayout;
 
     constructor(private fonticon: TNSFontIconService) { }
 
-    swipeCardLoaded(event) {
-        console.log('cardLoaded');
-        this._card = <SwipeCard>event.object;
+    swipeLayoutLoaded(event) {
+        console.log('cardLayoutLoaded');
+        this._cardLayout = <SwipeLayout>event.object;
     }
 
     swipeLeft(swipeLeftEvent: SwipeLeftEventData) {
@@ -83,20 +83,20 @@ export class AppComponent {
     }
 
     goAway() {
-        this._card.swipeRight().then(() => {
+        this._cardLayout.swipeRight().then(() => {
             console.log('swipeRight done');
         });
     }
 
 
     comeHere() {
-        this._card.swipeLeft().then(() => {
+        this._cardLayout.swipeLeft().then(() => {
             console.log('swipeLeft done');
         });
     }
 
     super () {
-        this._card.swipeUp().then(() => {
+        this._cardLayout.swipeUp().then(() => {
             console.log("swipeUp done");
         });
     }
