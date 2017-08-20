@@ -66,7 +66,7 @@ export class AppComponent {
     public swipeLayoutAnimated: ANIMATION_STATE;
     public gestureMode: GESTURE_MODE;
 
-    public cards: Array<any> = [{
+    public cards: Array<any> = [{ // dumb cards
         img: "https://img.youtube.com/vi/GGhKPm18E48/mqdefault.jpg",
         test: "Batman is pretty cool right?"
     },
@@ -89,12 +89,12 @@ export class AppComponent {
 
     constructor(private fonticon: TNSFontIconService) {
         this._swipeLayouts = new Array();
-        this.swipeLayoutAnimated = ANIMATION_STATE.ON_EVENTS;
-        this.gestureMode = GESTURE_MODE.DRAG;
+        this.swipeLayoutAnimated = ANIMATION_STATE.ON_EVENTS; // Will animate only on swipe down and up events
+        this.gestureMode = GESTURE_MODE.DRAG; // Cards will be draggable
     }
 
     swipeLayoutLoaded(event) {
-        this._swipeLayouts.push(<SwipeLayout>event.object);
+        this._swipeLayouts.push(<SwipeLayout>event.object); // Since it's an Array everytime a SwipeLayout load we add it
     }
 
     ngAfterViewInit(): void {
@@ -106,27 +106,27 @@ export class AppComponent {
         this.currentSwipeLayout = this._swipeLayouts[this._swipeLayouts.length - 1];
     }
     
-    swipeLeftCallback(swipeLeftEvent: SwipeLeftEventData) {
+    swipeLeftCallback(swipeLeftEvent: SwipeLeftEventData) { // never called (not binded to the XML)
         console.log('swipeLeft');
         this.next();
     }
 
-    swipeRightCallback(swipeRightEvent: SwipeRightEventData) {
+    swipeRightCallback(swipeRightEvent: SwipeRightEventData) { // never called (not binded to the XML)
         console.log('swipeRight');
         this.next();
     }
     
-    swipeUpCallback(swipeUpEvent: SwipeUpEventData) {
+    swipeUpCallback(swipeUpEvent: SwipeUpEventData) { // called once the swipe up animation is done
         console.log('swipeUp');
         this.next();
     }
     
-    swipeDownCallback(swipeDownEvent: SwipeDownEventData) {
+    swipeDownCallback(swipeDownEvent: SwipeDownEventData) { // called once the swipe down animation is done
         console.log('swipeDown');
         this.next();
     }
 
-    decline() {
+    decline() { // red button  on tap callback
         let that = this;
         this.currentSwipeLayout.animateSwipeRight().then(() => {
             that.next();
@@ -135,7 +135,7 @@ export class AppComponent {
     }
 
 
-    like() {
+    like() { // blue button on tap callback
         let that = this;
         this.currentSwipeLayout.animateSwipeLeft().then(() => {
             that.next();
@@ -143,7 +143,7 @@ export class AppComponent {
         });
     }
 
-    super() {
+    super() { // green button on tap callback
         let that = this;
         this.currentSwipeLayout.animateSwipeUp().then(() => {
             that.next();
@@ -154,6 +154,8 @@ export class AppComponent {
 ```
 
 ## API
+
+Further reading [here](https://github.com/rhanb/nativescript-swipe-layout/blob/master/API.MD).
 
 ### Properties
 
