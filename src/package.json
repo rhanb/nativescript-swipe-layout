@@ -1,7 +1,7 @@
 {
     "name": "nativescript-swipe-layout",
     "version": "1.0.0",
-    "description": "Your awesome NativeScript plugin.",
+    "description": "Easy Swipe Layout for NativeScript",
     "main": "swipe-layout",
     "typings": "index.d.ts",
     "nativescript": {
@@ -27,13 +27,15 @@
     },
     "keywords": [
         "NativeScript",
+        "Swipe",
         "JavaScript",
+        "TypeScrip",
         "Android",
         "iOS"
     ],
     "author": {
-        "name": "Your Name",
-        "email": "youremail@yourdomain.com"
+        "name": "rhanb",
+        "email": "aniel.jeanbaptiste@gmail.com"
     },
     "bugs": {
         "url": "https://github.com/rhanb/nativescript-swipe-layout/issues"
