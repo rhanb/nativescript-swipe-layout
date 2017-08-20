@@ -9,6 +9,10 @@ Simple swipeable layout, which allow you to drag it, detect swipe events, and pe
 
 Developed with :heart: by the team NativeBaguette 🥖
 
+<p align="center">
+  <img src="https://github.com/rhanb/nativescript-swipe-layout/blob/master/screenshot/demo.gif" width="300"/>
+</p>
+
 ## Installation
 
 ```javascript
