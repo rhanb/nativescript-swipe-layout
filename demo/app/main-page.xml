@@ -1,4 +1,4 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page"
-  xmlns:Card="nativescript-swipe-card">
-    <Card:SwipeCard height="300" width="300" backgroundColor="green" loaded="cardLoaded" swipeLeft="swipeLeft" />
+  xmlns:sl="nativescript-swipe-layout">
+    <sl:SwipeLayout height="300" width="300" backgroundColor="green" loaded="layoutLoaded" swipeLeft="swipeLeft" />
 </Page>
