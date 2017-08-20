@@ -17,39 +17,41 @@ tns plugin add nativescript-swipe-layout
 
 ## Usage 
 
-## Angular NativeScript
+## NativeScript with Angular
+
+Here is an example of how you can use this plugin to build a tinder like stack of cards. Here, the plugin [nativescript-cardview](https://github.com/bradmartin/nativescript-cardview) is used.
 
 ### XML
+#### app.component.html
    
 ```xml
+<ActionBar title="swipe-layout" icon="" class="action-bar">
+</ActionBar>
 <GridLayout rows="*, auto" columns="*" backgroundColor="#77849F">
-    <SwipeLayout height="300" width="300" row="0" colSpan="3" col="0" (loaded)="swipeLayoutLoaded($event)"          		(swipeLeft)="swipeLeft($event)"
-(swipeRight)="swipeRight($event)" 
-(swipeDown)="swipeDown($event)" 
-(swipeUp)="swipeUp($event)">
-        <CardView backgroundColor="white" margin="10" elevation="40" radius="5">
+    <SwipeLayout *ngFor="let card of cards" row="0" colSpan="3" col="0" (loaded)="swipeLayoutLoaded($event)" (swipeDown)="swipeDownCallback($event)" (swipeUp)="swipeUpCallback($event)" [animationState]="swipeLayoutAnimated" [gestureMode]="gestureMode">
+        <CardView width="300" height="300" backgroundColor="white" margin="10" elevation="40" radius="5">
             <GridLayout rows="200, auto" columns="*">
-                <image src="https://img.youtube.com/vi/GGhKPm18E48/mqdefault.jpg" stretch="aspectFill" colSpan="3" row="0">		   </image>
-                <label text="Batman wants to be friends?" class="info" textWrap="true" row="1" colSpan="3" class="p-20">		</label>
+                <image [src]="card.img" stretch="aspectFill" colSpan="3" row="0"></image>
+                <label [text]="card.test" class="info" textWrap="true" row="1" colSpan="3" class="p-20"></label>
             </GridLayout>
         </CardView>
     </SwipeLayout>
     <GridLayout row="1" rows="*" columns="auto, auto, auto">
-        <Button (tap)="comeHere()" row="0" col="0" class="p-20" class="btn btn-primary p-20" text="LIKE"></Button>
-        <Button text="SUPER" (tap)="super()" row="0" col="1" class="btn p-20" backgroundColor="#5BD6BB" color="white"</Button>
-        <Button text="DECLINE" (tap)="goAway()" row="0" col="2" class="btn p-20" backgroundColor="#B33A3A" color="white">	 </Button>
+        <Button (tap)="like()" row="0" col="0" class="p-20" class="btn btn-primary p-20" text="LIKE">
+                </Button>
+        <Button text="SUPER" (tap)="super()" row="0" col="1" class="btn p-20" backgroundColor="#5BD6BB" color="white"></Button>
+        <Button text="DECLINE" (tap)="decline()" row="0" col="2" class="btn p-20" backgroundColor="#B33A3A" color="white"></Button>
     </GridLayout>
 </GridLayout>
 ```
 ### Component
+#### app.component.ts
 
 ```typescript
 import { Component, ElementRef, ViewChild } from "@angular/core";
-import { registerElement } from 'nativescript-angular';
-import { SwipeLayout,  SwipeLeftEventData, SwipeDownEventData, SwipeUpEventData, SwipeRightEventData } from 'nativescript-swipe-layout';
-import { CardView } from 'nativescript-cardview';
-import { TNSFontIconService } from 'nativescript-ngx-fonticon';
-
+.
+. // other imports
+.
 registerElement("CardView", () => CardView);
 registerElement('SwipeLayout', () => SwipeLayout);
 
@@ -59,44 +61,92 @@ registerElement('SwipeLayout', () => SwipeLayout);
 })
 
 export class AppComponent {
-    private _cardLayout: SwipeLayout;
+    private _swipeLayouts: Array<SwipeLayout>;
+    private currentSwipeLayout: SwipeLayout;
+    public swipeLayoutAnimated: ANIMATION_STATE;
+    public gestureMode: GESTURE_MODE;
 
-    constructor(private fonticon: TNSFontIconService) { }
+    public cards: Array<any> = [{
+        img: "https://img.youtube.com/vi/GGhKPm18E48/mqdefault.jpg",
+        test: "Batman is pretty cool right?"
+    },
+    {
+        img: "https://img.youtube.com/vi/GGhKPm18E48/mqdefault.jpg",
+        test: "Batman is pretty cool right?"
+    }, {
+        img: "https://img.youtube.com/vi/GGhKPm18E48/mqdefault.jpg",
+        test: "Batman is pretty cool right?"
+    }, {
+        img: "https://img.youtube.com/vi/GGhKPm18E48/mqdefault.jpg",
+        test: "Batman is pretty cool right?"
+    }, {
+        img: "https://img.youtube.com/vi/GGhKPm18E48/mqdefault.jpg",
+        test: "Batman is pretty cool right?"
+    }, {
+        img: "https://img.youtube.com/vi/GGhKPm18E48/mqdefault.jpg",
+        test: "Batman is pretty cool right?"
+    }]
+
+    constructor(private fonticon: TNSFontIconService) {
+        this._swipeLayouts = new Array();
+        this.swipeLayoutAnimated = ANIMATION_STATE.ON_EVENTS;
+        this.gestureMode = GESTURE_MODE.DRAG;
+    }
 
     swipeLayoutLoaded(event) {
-        console.log('cardLayoutLoaded');
-        this._cardLayout = <SwipeLayout>event.object;
+        this._swipeLayouts.push(<SwipeLayout>event.object);
     }
 
-    swipeLeft(swipeLeftEvent: SwipeLeftEventData) {
+    ngAfterViewInit(): void {
+        this.currentSwipeLayout = this._swipeLayouts[this._swipeLayouts.length - 1];
+    }
+
+    private next() {
+        this._swipeLayouts.pop();
+        this.currentSwipeLayout = this._swipeLayouts[this._swipeLayouts.length - 1];
+    }
+    
+    swipeLeftCallback(swipeLeftEvent: SwipeLeftEventData) {
         console.log('swipeLeft');
+        this.next();
     }
 
-    swipeRight(swipeRightEvent: SwipeRightEventData) {
+    swipeRightCallback(swipeRightEvent: SwipeRightEventData) {
         console.log('swipeRight');
+        this.next();
     }
-    swipeUp(swipeUpEvent: SwipeUpEventData) {
+    
+    swipeUpCallback(swipeUpEvent: SwipeUpEventData) {
         console.log('swipeUp');
+        this.next();
     }
-    swipeDown(swipeDownEvent: SwipeDownEventData) {
+    
+    swipeDownCallback(swipeDownEvent: SwipeDownEventData) {
         console.log('swipeDown');
+        this.next();
     }
 
-    goAway() {
-        this._cardLayout.swipeRight().then(() => {
-            console.log('swipeRight done');
-        });
-    }
-
-
-    comeHere() {
-        this._cardLayout.swipeLeft().then(() => {
+    decline() {
+        let that = this;
+        this.currentSwipeLayout.animateSwipeRight().then(() => {
+            that.next();
             console.log('swipeLeft done');
         });
     }
 
-    super () {
-        this._cardLayout.swipeUp().then(() => {
+
+    like() {
+        let that = this;
+        this.currentSwipeLayout.animateSwipeLeft().then(() => {
+            that.next();
+            console.log('swipeRight done');
+        });
+    }
+
+    super() {
+        let that = this;
+        this.currentSwipeLayout.animateSwipeUp().then(() => {
+            that.next();
             console.log("swipeUp done");
         });
     }
@@ -113,15 +163,21 @@ export class AppComponent {
 | `swipeLeft` | `function` | `null` | Callback called when the layout is swiped to the left and the swipe animation is done.  |
 | `swipeUp` | `function` | `null` | Callback called when the layout is swiped up and the swipe animation is done.  |
 | `swipeDown` | `function` | `null` | Callback called when the layout is swiped down and the swipe animation is done.  |
+| `animationState` | `ANIMATION_STATE` | `ANIMATION_STATE.ALWAYS` | Enable to perform animation when swipe events are fired, not at all or only on swipe events with a callback  |
+| `gestureMode` | `GESTURE_MODE` | `GESTURE_MODE.SWIPE` | Allow to choose between the `drag` behavior or the `swipe` behavior |
 
 ### Methods
 
-| Method | Return | Description |
-| --- | --- | --- | 
-| `swipeRight` | `Promise<void>`| Method to manually start the swipe right animation |
-| `swipeLeft` | `Promise<void>`| Method to manually start the swipe left animation |
-| `swipeUp` | `Promise<void>`| Method to manually start the swipe up animation |
-| `swipeDown` | `Promise<void>`| Method to manually start the swipe down animation |
+| Method | Return | Parameters | Description | 
+| --- | --- | --- | --- | 
+| `animateSwipeRight` | `Promise<void>`| None | Method to manually start the swipe right animation. |
+| `animateSwipeLeft` | `Promise<void>`| None | Method to manually start the swipe left animation |
+| `animateSwipeUp` | `Promise<void>`| None | Method to manually start the swipe up animation |
+| `animateSwipeDown` | `Promise<void>`| None | Method to manually start the swipe down animation |
+| `swipe` | `Promise<void>`| (swipeEvent: SwipeEventData) | Method to manually start the swipe animation but has a parameter. From the direction given, will perform the right animation |
+
+All the method abose can be override, you can customise the animations as you want. If you wan't to override the animation which is performed on a swipe event you'll have to override the `swipe` method, since it's the one which is called when the event is fired :fire: 
+
 
 ## NativeBaguette 🥖
 
