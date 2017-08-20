@@ -1,59 +1,59 @@
 {
-    "name": "nativescript-swipe-layout",
-    "version": "1.0.0",
-    "description": "Easy Swipe Layout for NativeScript",
-    "main": "swipe-layout",
-    "typings": "index.d.ts",
-    "nativescript": {
-        "platforms": {
-            "android": "3.0.0",
-            "ios": "3.0.0"
-        }
-    },
-    "scripts": {
-        "tsc": "tsc -skipLibCheck",
-        "postclone": "npm i && node scripts/postclone.js && cd ../demo-ng && npm i && cd ../src && npm run plugin.link",
-        "test.android": "npm i && npm run tsc && npm run tslint && cd ../demo-ng && tns build android && tns test android --justlaunch",
-        "test.ios": "npm i && npm run tsc && npm run tslint && cd ../demo-ng && tns build ios && tns test ios --justlaunch",
-        "tslint": "cd .. && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\"",
-        "plugin.link": "npm link && cd ../demo-ng && npm link nativescript-swipe-layout && cd ../src",
-        "plugin.tscwatch": "npm run tsc -- -w",
-        "demo.ios": "npm i && npm run tsc && cd ../demo-ng && tns run ios --syncAllFiles",
-        "demo.android": "npm i && npm run tsc && cd ../demo-ng && tns run android --syncAllFiles"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/rhanb/nativescript-swipe-layout.git"
-    },
-    "keywords": [
-        "NativeScript",
-        "Swipe",
-        "JavaScript",
-        "TypeScrip",
-        "Android",
-        "iOS"
-    ],
-    "author": {
-        "name": "rhanb",
-        "email": "aniel.jeanbaptiste@gmail.com"
-    },
-    "bugs": {
-        "url": "https://github.com/rhanb/nativescript-swipe-layout/issues"
-    },
-    "license": "Apache-2.0",
-    "homepage": "https://github.com/rhanb/nativescript-swipe-layout",
-    "readmeFilename": "README.md",
-    "peerDependencies": {
-        "tns-core-modules": "^3.0.1"
-    },
-    "devDependencies": {
-        "tns-core-modules": "^3.0.1",
-        "tns-platform-declarations": "^3.0.1",
-        "typescript": "^2.2.2",
-        "prompt": "^1.0.0",
-        "rimraf": "^2.5.0",
-        "tslint": "^5.0.0"
-    },
-    "dependencies": {},
-    "bootstrapper": "nativescript-plugin-seed"
+  "name": "nativescript-swipe-layout",
+  "version": "1.0.2",
+  "description": "Easy Swipe Layout for NativeScript",
+  "main": "swipe-layout",
+  "typings": "index.d.ts",
+  "nativescript": {
+    "platforms": {
+      "android": "3.0.0",
+      "ios": "3.0.0"
+    }
+  },
+  "scripts": {
+    "tsc": "tsc -skipLibCheck",
+    "postclone": "npm i && node scripts/postclone.js && cd ../demo-ng && npm i && cd ../src && npm run plugin.link",
+    "test.android": "npm i && npm run tsc && npm run tslint && cd ../demo-ng && tns build android && tns test android --justlaunch",
+    "test.ios": "npm i && npm run tsc && npm run tslint && cd ../demo-ng && tns build ios && tns test ios --justlaunch",
+    "tslint": "cd .. && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\"",
+    "plugin.link": "npm link && cd ../demo-ng && npm link nativescript-swipe-layout && cd ../src",
+    "plugin.tscwatch": "npm run tsc -- -w",
+    "demo.ios": "npm i && npm run tsc && cd ../demo-ng && tns run ios --syncAllFiles",
+    "demo.android": "npm i && npm run tsc && cd ../demo-ng && tns run android --syncAllFiles"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rhanb/nativescript-swipe-layout.git"
+  },
+  "keywords": [
+    "NativeScript",
+    "Swipe",
+    "JavaScript",
+    "TypeScrip",
+    "Android",
+    "iOS"
+  ],
+  "author": {
+    "name": "rhanb",
+    "email": "aniel.jeanbaptiste@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/rhanb/nativescript-swipe-layout/issues"
+  },
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/rhanb/nativescript-swipe-layout",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "tns-core-modules": "^3.0.1"
+  },
+  "devDependencies": {
+    "tns-core-modules": "^3.0.1",
+    "tns-platform-declarations": "^3.0.1",
+    "typescript": "^2.2.2",
+    "prompt": "^1.0.0",
+    "rimraf": "^2.5.0",
+    "tslint": "^5.0.0"
+  },
+  "dependencies": {},
+  "bootstrapper": "nativescript-plugin-seed"
 }
