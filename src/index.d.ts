@@ -55,7 +55,7 @@ export declare class SwipeLayoutBase extends ContentView {
     animateSwipeRight(): Promise<void>;
     animateSwipeUp(): Promise<void>;
     animateSwipeDown(): Promise<void>;
-    private swipe(eventData);
+    swipe(eventData):Promise<void>;
 }
 
 export declare class SwipeLayout extends SwipeLayoutBase {

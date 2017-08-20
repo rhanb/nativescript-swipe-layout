@@ -1,5 +1,6 @@
 import { ContentView } from "tns-core-modules/ui/content-view";
 import { Property } from "tns-core-modules/ui/core/properties/properties";
+import { SwipeEventData } from "./swipe-event-data";
 import { GESTURE_MODE, ANIMATION_STATE } from "./swipe-layout.enums";
 export declare class SwipeLayoutBase extends ContentView {
     swipeLeftEvent: string;
@@ -32,7 +33,7 @@ export declare class SwipeLayoutBase extends ContentView {
     animateSwipeRight(): Promise<void>;
     animateSwipeUp(): Promise<void>;
     animateSwipeDown(): Promise<void>;
-    private swipe(eventData);
+    swipe(eventData: SwipeEventData): Promise<void>;
 }
 export declare const animationStateProperty: Property<SwipeLayoutBase, ANIMATION_STATE>;
 export declare const gestureModeProperty: Property<SwipeLayoutBase, GESTURE_MODE>;

@@ -190,7 +190,7 @@ export class SwipeLayoutBase extends ContentView {
         return this.swipe(this.getEventData(SwipeDirection.down));
     }
 
-    private swipe(eventData: SwipeEventData): Promise<void> {
+    public swipe(eventData: SwipeEventData): Promise<void> {
         let that = this;
         this._cancelAllAnimations();
         return this.animate({

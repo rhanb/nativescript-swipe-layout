@@ -26,6 +26,7 @@ export class AppComponent implements AfterViewInit {
     private currentSwipeLayout: SwipeLayout;
     public swipeLayoutAnimated: ANIMATION_STATE;
     public gestureMode: GESTURE_MODE;
+    
 
     public cards: Array<any> = [{
         img: "https://img.youtube.com/vi/GGhKPm18E48/mqdefault.jpg",
