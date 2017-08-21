@@ -1,6 +1,6 @@
 {
   "name": "nativescript-swipe-layout",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Easy Swipe Layout for NativeScript",
   "main": "swipe-layout",
   "typings": "index.d.ts",

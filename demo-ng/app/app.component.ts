@@ -1,12 +1,13 @@
 import { Component, ElementRef, ViewChild, AfterViewInit } from "@angular/core";
 import { registerElement } from 'nativescript-angular';
 import {
-    SwipeLayout,
     SwipeLeftEventData,
     SwipeDownEventData,
     SwipeUpEventData,
     SwipeRightEventData
 } from 'nativescript-swipe-layout';
+import {SwipeLayout} from './src';
+
 import { ANIMATION_STATE, GESTURE_MODE } from 'nativescript-swipe-layout/swipe-layout.enums';
 import { CardView } from 'nativescript-cardview';
 import { TNSFontIconService } from 'nativescript-ngx-fonticon';

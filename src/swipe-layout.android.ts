@@ -1,6 +1,8 @@
 import { SwipeLayoutBase, gestureModeProperty } from './swipe-layout.common';
 import { GESTURE_MODE } from "./swipe-layout.enums";
 
+declare var android;
+
 export class SwipeLayout extends SwipeLayoutBase {
     private _androidViewId: number;
 
@@ -10,8 +12,7 @@ export class SwipeLayout extends SwipeLayoutBase {
 
 
     public createNativeView() {
-        this.nativeView =  new android.view.View(this._context);
-        return this.nativeView;
+        return new android.widgets.LinearLayout(this._context)
     }
 
     public initNativeView() {
