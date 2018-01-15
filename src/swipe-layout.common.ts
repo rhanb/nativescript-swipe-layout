@@ -124,7 +124,6 @@ export class SwipeLayoutBase extends ContentView {
         if (panDirection.isSwipe) {
             this.commonHandler(panDirection.swipeDirection);
         } else {
-            this._cancelAllAnimations();
             let that = this;
             this.centerBack();
         }
@@ -192,7 +191,6 @@ export class SwipeLayoutBase extends ContentView {
 
     public swipe(eventData: SwipeEventData): Promise<void> {
         let that = this;
-        this._cancelAllAnimations();
         return this.animate({
             translate: {
                 x: eventData.destinationX,

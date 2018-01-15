@@ -12,7 +12,7 @@ export class SwipeLayout extends SwipeLayoutBase {
 
 
     public createNativeView() {
-        return new android.widgets.LinearLayout(this._context)
+        return new android.widget.LinearLayout(this._context)
     }
 
     public initNativeView() {

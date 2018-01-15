@@ -1,8 +1,8 @@
-import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
+import { NgModule, NgModuleFactoryLoader, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
-import { AppComponent } from "./app.component";
-import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
 
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
 
 @NgModule({
     bootstrap: [
@@ -10,20 +10,13 @@ import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
     ],
     imports: [
         NativeScriptModule,
-        TNSFontIconModule.forRoot({
-			'fa': './font-awesome/css/font-awesome.css'
-		})
+        AppRoutingModule
     ],
     declarations: [
         AppComponent
-    ],
-    providers: [
     ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
 })
-/*
-Pass your application module to the bootstrapModule function located in main.ts to start your app
-*/
 export class AppModule { }
