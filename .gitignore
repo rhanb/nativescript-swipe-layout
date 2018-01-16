@@ -21,6 +21,7 @@ demo-ng/*.d.ts
 demo/lib
 demo/platforms
 demo/node_modules
+demo-ng/app/App_Resources
 demo-ng/lib
 demo-ng/platforms
 demo-ng/node_modules
