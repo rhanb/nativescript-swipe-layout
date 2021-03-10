@@ -1,26 +1,25 @@
-import { SwipeLayoutBase, gestureModeProperty } from './swipe-layout.common';
+import { SwipeLayoutBase, gestureModeProperty } from "./swipe-layout.common";
 import { GESTURE_MODE } from "./swipe-layout.enums";
 
-declare var android;
-
 export class SwipeLayout extends SwipeLayoutBase {
-    private _androidViewId: number;
+  private _androidViewId: number;
 
-    get android(): any {
-        return this.nativeView;
-    }
+  // @ts-ignore
+  get android(): any {
+    return this.nativeView;
+  }
+  // end @ts-ignore
 
+  public createNativeView() {
+    return new android.widget.LinearLayout(this._context);
+  }
 
-    public createNativeView() {
-        return new android.widget.LinearLayout(this._context)
-    }
+  public initNativeView() {
+    this._androidViewId = android.view.View.generateViewId();
+    this.nativeView.setId(this._androidViewId);
+  }
 
-    public initNativeView() {
-        this._androidViewId = android.view.View.generateViewId();
-        this.nativeView.setId(this._androidViewId);
-      }
-
-    [gestureModeProperty.setNative](gestureModevalue: GESTURE_MODE) {
-        super.setGestureMode(gestureModevalue);
-    }
+  [gestureModeProperty.setNative](gestureModevalue: GESTURE_MODE) {
+    super.setGestureMode(gestureModevalue);
+  }
 }

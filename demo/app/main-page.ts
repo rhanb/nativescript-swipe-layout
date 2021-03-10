@@ -1,19 +1,18 @@
-import * as observable from 'tns-core-modules/data/observable';
-import * as pages from 'tns-core-modules/ui/page';
-import { HelloWorldModel } from './main-view-model';
-import { SwipeLeftEvent } from "nativescript-swipe-layout";
+import { Page, EventData } from "@nativescript/core";
+import { SwipeLeftEventData } from "nativescript-swipe-layout";
+import { HelloWorldModel } from "./main-view-model";
 
 // Event handler for Page 'loaded' event attached in main-page.xml
-export function pageLoaded(args: observable.EventData) {
-    // Get the event sender
-    let page = <pages.Page>args.object;
-    page.bindingContext = new HelloWorldModel();
+export function pageLoaded(args: EventData) {
+  // Get the event sender
+  let page = <Page>args.object;
+  page.bindingContext = new HelloWorldModel();
 }
 
-export function cardLoaded(args: observable.EventData) {
-    console.log('cardLoaded');
+export function cardLoaded(args: EventData) {
+  console.log("cardLoaded", args.object);
 }
 
-export function swipeLeft(event: SwipeLeftEvent) {
-    console.log('swipeLeft');
+export function swipeLeft(event: SwipeLeftEventData) {
+  console.log("swipeLeft", event);
 }

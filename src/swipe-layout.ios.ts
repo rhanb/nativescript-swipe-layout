@@ -1,41 +1,33 @@
-import { SwipeLayoutBase, gestureModeProperty } from './swipe-layout.common';
-import { GestureTypes } from "tns-core-modules/ui/gestures/gestures";
+import { SwipeLayoutBase, gestureModeProperty } from "./swipe-layout.common";
 import { GESTURE_MODE } from "./swipe-layout.enums";
 
-declare var CGRectMake, UIView;
-
+declare const CGRectMake;
 
 export class SwipeLayout extends SwipeLayoutBase {
+  constructor() {
+    super();
+    this.nativeView = new UIView(CGRectMake(0, 0, 0, 0));
+  }
 
-    constructor() {
-        super();
-        this.nativeView = new UIView(CGRectMake(0, 0, 0, 0));
-    }
+  // @ts-ignore
+  get ios(): any {
+    return this.nativeView;
+  }
+  // end @ts-ignore
 
+  public onLoaded() {
+    super.onLoaded();
+  }
 
-    get ios(): any {
-        return this.nativeView;
-    }
+  public initNativeView() {}
 
+  public onUnloaded() {
+    super.onUnloaded();
+  }
 
-    public onLoaded() {
-        super.onLoaded();
-    }
+  public disposeNativeView() {}
 
-    public initNativeView() {
-
-    }
-
-    public onUnloaded() {
-        super.onUnloaded();
-    }
-
-    public disposeNativeView() {
-
-    }
-
-    [gestureModeProperty.setNative](gestureModevalue: GESTURE_MODE) {
-        super.setGestureMode(gestureModevalue);
-    }
-
+  [gestureModeProperty.setNative](gestureModevalue: GESTURE_MODE) {
+    super.setGestureMode(gestureModevalue);
+  }
 }

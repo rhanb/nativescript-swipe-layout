@@ -1,6 +1,5 @@
-import { Observable, EventData } from 'tns-core-modules/data/observable';
-import { SwipeLayout } from 'nativescript-swipe-layout';
-import { SwipeLeftEvent } from "nativescript-swipe-layout";
+import { Observable, EventData } from "@nativescript/core";
+import { SwipeLayout, SwipeLeftEventData } from "nativescript-swipe-layout";
 
 export class HelloWorldModel extends Observable {
   public message: string;
@@ -8,16 +7,15 @@ export class HelloWorldModel extends Observable {
 
   constructor() {
     super();
-    console.log('constructor');
-    
+    console.log("constructor");
   }
 
   public cardLoaded(event: EventData) {
     this._swipeLayout = <SwipeLayout>event.object;
-    console.log('cardLoaded');
+    console.log("cardLoaded");
   }
 
-  public swipeLeft(event: SwipeLeftEvent) {
-    console.log('swipeLeft');
+  public swipeLeft(event: SwipeLeftEventData) {
+    console.log("swipeLeft", event);
   }
 }
