@@ -43,9 +43,6 @@
   "license": "Apache-2.0",
   "homepage": "https://github.com/rhanb/nativescript-swipe-layout",
   "readmeFilename": "README.md",
-  "peerDependencies": {
-    "@nativescript/core": "^3.4.0"
-  },
   "devDependencies": {
     "@nativescript/core": "~7.3.0",
     "@nativescript/types": "~7.3.0",
